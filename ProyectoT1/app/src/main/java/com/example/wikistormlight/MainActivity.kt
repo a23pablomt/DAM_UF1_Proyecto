@@ -1,7 +1,6 @@
 package com.example.wikistormlight
 
 import android.os.Bundle
-import android.widget.GridView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -19,24 +18,34 @@ import androidx.compose.ui.Modifier
 import com.example.wikistormlight.ui.theme.WikiStormlightTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.paddingFromBaseline
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.rounded.AddCircle
+import androidx.compose.material.icons.rounded.LocationOn
+import androidx.compose.material.icons.rounded.Lock
 import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBarDefaults
@@ -44,7 +53,11 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -59,7 +72,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WikiStormlightTheme {
-                Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
+                Scaffold( modifier = Modifier.fillMaxSize().systemBarsPadding() ) { innerPadding ->
                     Greeting(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
@@ -74,29 +87,23 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
 
-    var drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
     Surface(color = Color(0xFFD9D9D9)){
-        // Create a boolean variable
-        // to store the display menu state
         var mDisplayMenu by remember { mutableStateOf(false) }
 
-        // fetching local context
         val mContext = LocalContext.current
-
-        // Creating a Top bar
         TopAppBar(
             navigationIcon = {
                 IconButton(onClick = {
                     scope.launch {
-                        drawerState.apply {
-                            if (isClosed) open() else close()
+                        if (drawerState.isClosed) {
+                            drawerState.open()
                         }
                     }
-
                 }) {
-                    Icon(imageVector = Icons.Rounded.Menu, contentDescription = null)
+                    Icon(imageVector = Icons.Rounded.Menu, contentDescription = "Open Navigation Drawer")
                 }
             },
             title = {Text("El Archivo de las Tormentas", color = Color.White)} ,
@@ -126,20 +133,20 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             SearchBar(modifier = Modifier
                 .width(300.dp)
                 .offset(0.dp, (-120).dp),
-                query = "Buscar...",
+                query = "",
                 onQueryChange = {},
                 onSearch = {},
                 active = false,
                 onActiveChange = {},
                 placeholder = {
-                    Text(text = "Enter your query")
+                    Text(text = "Buscar...")
                 },
                 trailingIcon = {
                     Icon(imageVector = Icons.Default.Search, contentDescription = null)
                 }) {}
             Row(modifier = Modifier.width(300.dp).height(200.dp).offset(0.dp, (-50).dp)){
                 LazyVerticalGrid(
-                    columns = GridCells.Fixed(2), // 2 columns grid
+                    columns = GridCells.Fixed(2),
                     modifier = Modifier.padding(16.dp)
                 ) {
                     listOf(items(1) {
@@ -156,9 +163,12 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                                     .align(Alignment.TopCenter)
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.choose_order), // Use your resource
+                                    painter = painterResource(id = R.drawable.shallan),
                                     contentDescription = "Image",
-                                    modifier = Modifier.fillMaxSize()
+                                    modifier = Modifier.fillMaxHeight()
+                                        .clip(RoundedCornerShape(20.dp))
+                                        .border(5.dp, Color.White, RoundedCornerShape(20.dp)),
+                                    contentScale = ContentScale.Crop,
                                 )
                             }
                             Box(
@@ -192,9 +202,12 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                                     .align(Alignment.TopCenter)
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.choose_order), // Use your resource
+                                    painter = painterResource(id = R.drawable.shallan),
                                     contentDescription = "Image",
-                                    modifier = Modifier.fillMaxSize()
+                                    modifier = Modifier.fillMaxHeight()
+                                        .clip(RoundedCornerShape(20.dp))
+                                        .border(5.dp, Color.White, RoundedCornerShape(20.dp)),
+                                    contentScale = ContentScale.Crop,
                                 )
                             }
                             Box(
@@ -221,7 +234,46 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            ModalDrawerSheet { /* Drawer content */ }
+            ModalDrawerSheet(drawerContainerColor = Color(0xFF78A0C8)) {
+                Image(painter = painterResource(R.drawable.shallan),
+                    contentDescription = ("Str"),
+                    modifier = Modifier.fillMaxWidth())
+                HorizontalDivider(modifier = Modifier.padding(5.dp).offset(0.dp, (-2).dp), color = Color(0xFF141414))
+                NavigationDrawerItem(
+                    icon = { Icon(imageVector = Icons.Rounded.Person, contentDescription = null) },
+                    label = { Text(text = "Personajes", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    selected = false,
+                    onClick = { /*TODO*/ },
+                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
+                )
+                HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
+                NavigationDrawerItem(
+                    icon = { Icon(imageVector = Icons.Rounded.AddCircle, contentDescription = null) },
+                    label = { Text(text = "Grupos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    selected = false,
+                    onClick = { /*TODO*/ },
+                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
+                )
+                HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
+
+                NavigationDrawerItem(
+                    icon = { Icon(imageVector = Icons.Rounded.LocationOn, contentDescription = null) },
+                    label = { Text(text = "Lugares", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    selected = false,
+                    onClick = { /*TODO*/ },
+                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
+                )
+                HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
+                NavigationDrawerItem(
+                    icon = { Icon(imageVector = Icons.Rounded.Lock, contentDescription = null) },
+                    label = { Text(text = "Magia", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    selected = false,
+                    onClick = { /*TODO*/ },
+                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
+                )
+                HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
+
+            }
         }
     ) {}
 }
