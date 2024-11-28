@@ -19,6 +19,10 @@ import com.example.wikistormlight.ui.theme.WikiStormlightTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.ScrollableState
+import androidx.compose.foundation.gestures.rememberScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -53,6 +57,7 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
@@ -61,6 +66,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -85,7 +91,7 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greetingh(name: String, modifier: Modifier = Modifier) {
 
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -278,12 +284,160 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     ) {}
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val scope = rememberCoroutineScope()
+
+    Surface(color = Color(0xFFD9D9D9)) {
+        var mDisplayMenu by remember { mutableStateOf(false) }
+
+        val mContext = LocalContext.current
+        TopAppBar(
+            navigationIcon = {
+                IconButton(onClick = {
+                    scope.launch {
+                        if (drawerState.isClosed) {
+                            drawerState.open()
+                        }
+                    }
+                }) {
+                    Icon(imageVector = Icons.Rounded.Menu, contentDescription = "Open Navigation Drawer")
+                }
+            },
+            title = {
+                Box(modifier = Modifier.fillMaxWidth()) {
+                    Text(
+                        text = name,
+                        modifier = Modifier.align(Alignment.Center),
+                        color = Color.White
+                    )
+                }
+            },
+            colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color(0xFF78A0C8)),
+            actions = {
+                IconButton(onClick = { mDisplayMenu = !mDisplayMenu }) {
+                    Icon(Icons.Default.MoreVert, "")
+                }
+
+                DropdownMenu(
+                    expanded = mDisplayMenu,
+                    onDismissRequest = { mDisplayMenu = false }
+                ) {}
+            }
+        )
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 56.dp)
+        ) {
+            val nombres = listOf("Sigzil", "Cikatriz", "Teft", "Moash", "Roca")
+
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                modifier = Modifier.padding(16.dp, 0.dp)
+            ) {
+                items(nombres.size) { index ->
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(0.dp, 30.dp)
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .width(120.dp)
+                                .height(120.dp)
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(Color.White)
+                                .align(Alignment.TopCenter)
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.shallan),
+                                contentDescription = "Image",
+                                modifier = Modifier
+                                    .fillMaxHeight()
+                                    .clip(RoundedCornerShape(20.dp))
+                                    .border(5.dp, Color.White, RoundedCornerShape(20.dp)),
+                                contentScale = ContentScale.Crop
+                            )
+                        }
+                        Box(
+                            modifier = Modifier
+                                .width(120.dp)
+                                .height(20.dp)
+                                .offset(0.dp, 75.dp)
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(Color.White)
+                                .align(Alignment.Center)
+                        ) {
+                            Text(
+                                nombres[index],
+                                modifier = Modifier.align(Alignment.Center),
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            ModalDrawerSheet(drawerContainerColor = Color(0xFF78A0C8)) {
+                Image(painter = painterResource(R.drawable.shallan),
+                    contentDescription = "Str",
+                    modifier = Modifier.fillMaxWidth())
+                HorizontalDivider(modifier = Modifier.padding(5.dp).offset(0.dp, (-2).dp), color = Color(0xFF141414))
+                NavigationDrawerItem(
+                    icon = { Icon(imageVector = Icons.Rounded.Person, contentDescription = null) },
+                    label = { Text(text = "Personajes", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    selected = false,
+                    onClick = { /*TODO*/ },
+                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
+                )
+                HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
+                NavigationDrawerItem(
+                    icon = { Icon(imageVector = Icons.Rounded.AddCircle, contentDescription = null) },
+                    label = { Text(text = "Grupos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    selected = false,
+                    onClick = { /*TODO*/ },
+                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
+                )
+                HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
+
+                NavigationDrawerItem(
+                    icon = { Icon(imageVector = Icons.Rounded.LocationOn, contentDescription = null) },
+                    label = { Text(text = "Lugares", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    selected = false,
+                    onClick = { /*TODO*/ },
+                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
+                )
+                HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
+                NavigationDrawerItem(
+                    icon = { Icon(imageVector = Icons.Rounded.Lock, contentDescription = null) },
+                    label = { Text(text = "Magia", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    selected = false,
+                    onClick = { /*TODO*/ },
+                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
+                )
+                HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
+
+            }
+        }
+    ) {}
+}
+
 
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     WikiStormlightTheme {
-        Greeting("Android")
+        Greeting("Personajes")
     }
 }
