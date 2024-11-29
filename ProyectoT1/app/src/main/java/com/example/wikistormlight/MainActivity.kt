@@ -291,7 +291,7 @@ fun Greetingh(name: String, modifier: Modifier = Modifier) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greetingd(name: String, modifier: Modifier = Modifier) {
 
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -436,6 +436,148 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         }
     }}
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val scope = rememberCoroutineScope()
+
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            ModalDrawerSheet(drawerContainerColor = Color(0xFF78A0C8)) {
+                Image(painter = painterResource(R.drawable.shallan),
+                    contentDescription = "Str",
+                    modifier = Modifier.fillMaxWidth())
+                HorizontalDivider(modifier = Modifier
+                    .padding(5.dp)
+                    .offset(0.dp, (-2).dp), color = Color(0xFF141414))
+                NavigationDrawerItem(
+                    icon = { Icon(imageVector = Icons.Rounded.Person, contentDescription = null) },
+                    label = { Text(text = "Personajes", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    selected = false,
+                    onClick = { /*TODO*/ },
+                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
+                )
+                HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
+                NavigationDrawerItem(
+                    icon = { Icon(imageVector = Icons.Rounded.AddCircle, contentDescription = null) },
+                    label = { Text(text = "Grupos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    selected = false,
+                    onClick = { /*TODO*/ },
+                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
+                )
+                HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
+
+                NavigationDrawerItem(
+                    icon = { Icon(imageVector = Icons.Rounded.LocationOn, contentDescription = null) },
+                    label = { Text(text = "Lugares", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    selected = false,
+                    onClick = { /*TODO*/ },
+                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
+                )
+                HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
+                NavigationDrawerItem(
+                    icon = { Icon(imageVector = Icons.Rounded.Lock, contentDescription = null) },
+                    label = { Text(text = "Magia", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    selected = false,
+                    onClick = { /*TODO*/ },
+                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
+                )
+                HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
+
+            }
+        }
+    ) {Surface(color = Color(0xFFD9D9D9)) {
+        var mDisplayMenu by remember { mutableStateOf(false) }
+
+        val mContext = LocalContext.current
+
+        val nombres = listOf("Kaladin","Sigzil", "Cikatriz", "Teft", "Moash", "Roca", "Hobber", "Dabbid", "Shen", "Lopen")
+        TopAppBar(
+            navigationIcon = {
+                IconButton(onClick = {
+                    scope.launch {
+                        if (drawerState.isClosed) {
+                            drawerState.open()
+                        }
+                    }
+                }) {
+                    Icon(imageVector = Icons.Rounded.Menu, contentDescription = "Open Navigation Drawer")
+                }
+            },
+            title = {
+                Box(modifier = Modifier.fillMaxWidth()) {
+                    Text(
+                        text = name,
+                        modifier = Modifier.align(Alignment.Center),
+                        color = Color.White
+                    )
+                }
+            },
+            colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color(0xFF78A0C8)),
+            actions = {
+                IconButton(onClick = { mDisplayMenu = !mDisplayMenu }) {
+                    Icon(Icons.Default.MoreVert, "")
+                }
+
+                DropdownMenu(
+                    expanded = mDisplayMenu,
+                    onDismissRequest = { mDisplayMenu = false }
+                ) {}
+            }
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(0.dp, 64.dp)
+            ) {
+            Row (modifier = Modifier.fillMaxWidth()) {
+                Column {
+                    Box(
+                        modifier = Modifier
+                            .width(120.dp)
+                            .height(120.dp)
+                            .clip(RoundedCornerShape(20.dp))
+                            .background(Color.White)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.shallan),
+                            contentDescription = "Image",
+                            modifier = Modifier
+                                .fillMaxHeight()
+                                .clip(RoundedCornerShape(20.dp))
+                                .border(5.dp, Color.White, RoundedCornerShape(20.dp)),
+                            contentScale = ContentScale.Crop
+                        )
+                    }
+                }
+                Column {
+                    Box(
+                        modifier = Modifier
+                            .width(120.dp)
+                            .height(20.dp)
+                            .offset(0.dp, 75.dp)
+                            .clip(RoundedCornerShape(20.dp))
+                            .background(Color.White)
+                    ) {
+                        Text(
+                            "Kaladin",
+                            modifier = Modifier.align(Alignment.Center),
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
+            }
+            }
+        }
+    }
+}
+
+
 
 
 
