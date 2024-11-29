@@ -1,12 +1,15 @@
 package com.example.wikistormlight
 
+import android.content.res.Configuration
 import android.os.Bundle
+import android.view.View.OnClickListener
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -83,6 +86,7 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.resources.configuration.uiMode = Configuration.UI_MODE_NIGHT_NO
         enableEdgeToEdge()
         setContent {
             val navController: NavHostController = rememberNavController()
@@ -97,49 +101,55 @@ fun MyApp(navController: NavHostController) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
-    NavHost(navController = navController, startDestination = "start") {
-        composable("start") {
+    NavHost(navController = navController, startDestination = "start/WikiStormlight") {
+        composable("start/{name}") { backStackEntry ->
             WikiStormlightTheme {
                 Scaffold( modifier = Modifier
                     .fillMaxSize()
                     .systemBarsPadding() ) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding),
-                        navController,
-                        drawerState,
-                        scope
-                    )
+                    backStackEntry.arguments?.getString("name")?.let {
+                        Greeting(
+                            it,
+                            modifier = Modifier.padding(innerPadding),
+                            navController,
+                            drawerState,
+                            scope
+                        )
+                    }
                 }
             }
         }
-        composable("select") {
+        composable("select/{tipo}") { backStackEntry ->
             WikiStormlightTheme {
                 Scaffold( modifier = Modifier
                     .fillMaxSize()
                     .systemBarsPadding() ) { innerPadding ->
-                    SelectorDePersonaje(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding),
-                        navController,
-                        drawerState,
-                        scope
-                    )
+                    backStackEntry.arguments?.getString("tipo")?.let {
+                        SelectorDePersonaje(
+                            it,
+                            modifier = Modifier.padding(innerPadding),
+                            navController,
+                            drawerState,
+                            scope
+                        )
+                    }
                 }
             }
         }
-        composable("datos") {
+        composable("datos/{personaje}") { backStackEntry ->
             WikiStormlightTheme {
                 Scaffold( modifier = Modifier
                     .fillMaxSize()
                     .systemBarsPadding() ) { innerPadding ->
-                    PersonajeWiki(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding),
-                        navController,
-                        drawerState,
-                        scope
-                    )
+                    backStackEntry.arguments?.getString("personaje")?.let {
+                        PersonajeWiki(
+                            it,
+                            modifier = Modifier.padding(innerPadding),
+                            navController,
+                            drawerState,
+                            scope
+                        )
+                    }
                 }
             }
         }
@@ -164,7 +174,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavCont
                     icon = { Icon(imageVector = Icons.Rounded.Person, contentDescription = null) },
                     label = { Text(text = "Personajes", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { navController.navigate("select")},
+                    onClick = { navController.navigate("select/Personajes") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -172,7 +182,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavCont
                     icon = { Icon(imageVector = Icons.Rounded.AddCircle, contentDescription = null) },
                     label = { Text(text = "Grupos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate("select/Grupos") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -181,7 +191,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavCont
                     icon = { Icon(imageVector = Icons.Rounded.LocationOn, contentDescription = null) },
                     label = { Text(text = "Lugares", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate("select/Lugares") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -189,7 +199,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavCont
                     icon = { Icon(imageVector = Icons.Rounded.Lock, contentDescription = null) },
                     label = { Text(text = "Magia", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate("select/Magia") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -271,6 +281,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavCont
                             Box(
                                 modifier = Modifier
                                     .height(270.dp)
+                                    .clickable {
+                                        navController.navigate("datos/Sigzil")
+                                    }
                             ) {
                                 Box(
                                     modifier = Modifier
@@ -311,6 +324,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavCont
                                 Box(
                                     modifier = Modifier
                                         .height(270.dp)
+                                        .clickable {
+                                            navController.navigate("datos/Kaladin")
+                                        }
                                 ) {
                                     Box(
                                         modifier = Modifier
@@ -319,6 +335,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavCont
                                             .clip(RoundedCornerShape(20.dp))
                                             .background(Color.White)
                                             .align(Alignment.TopCenter)
+
                                     ) {
                                         Image(
                                             painter = painterResource(id = R.drawable.shallan),
@@ -363,7 +380,7 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
         drawerContent = {
             ModalDrawerSheet(drawerContainerColor = Color(0xFF78A0C8)) {
                 Image(painter = painterResource(R.drawable.shallan),
-                    contentDescription = "Str",
+                    contentDescription = ("Str"),
                     modifier = Modifier.fillMaxWidth())
                 HorizontalDivider(modifier = Modifier
                     .padding(5.dp)
@@ -372,7 +389,7 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
                     icon = { Icon(imageVector = Icons.Rounded.Person, contentDescription = null) },
                     label = { Text(text = "Personajes", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate("select/Personajes") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -380,7 +397,7 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
                     icon = { Icon(imageVector = Icons.Rounded.AddCircle, contentDescription = null) },
                     label = { Text(text = "Grupos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate("select/Grupos") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -389,7 +406,7 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
                     icon = { Icon(imageVector = Icons.Rounded.LocationOn, contentDescription = null) },
                     label = { Text(text = "Lugares", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate("select/Lugares") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -397,7 +414,7 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
                     icon = { Icon(imageVector = Icons.Rounded.Lock, contentDescription = null) },
                     label = { Text(text = "Magia", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate("select/Magia") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -457,6 +474,9 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(0.dp, 30.dp)
+                            .clickable {
+                                navController.navigate("datos/${nombres[index]}")
+                            }
                     ) {
                         Box(
                             modifier = Modifier
@@ -508,7 +528,7 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
         drawerContent = {
             ModalDrawerSheet(drawerContainerColor = Color(0xFF78A0C8)) {
                 Image(painter = painterResource(R.drawable.shallan),
-                    contentDescription = "Str",
+                    contentDescription = ("Str"),
                     modifier = Modifier.fillMaxWidth())
                 HorizontalDivider(modifier = Modifier
                     .padding(5.dp)
@@ -517,7 +537,7 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                     icon = { Icon(imageVector = Icons.Rounded.Person, contentDescription = null) },
                     label = { Text(text = "Personajes", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate("select/Personajes") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -525,7 +545,7 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                     icon = { Icon(imageVector = Icons.Rounded.AddCircle, contentDescription = null) },
                     label = { Text(text = "Grupos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate("select/Grupos") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -534,7 +554,7 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                     icon = { Icon(imageVector = Icons.Rounded.LocationOn, contentDescription = null) },
                     label = { Text(text = "Lugares", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate("select/Lugares") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -542,7 +562,7 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                     icon = { Icon(imageVector = Icons.Rounded.Lock, contentDescription = null) },
                     label = { Text(text = "Magia", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate("select/Magia") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
