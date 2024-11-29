@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,8 +17,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
@@ -31,6 +34,7 @@ import androidx.compose.material.icons.rounded.LocationOn
 import androidx.compose.material.icons.rounded.Lock
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.Person
+import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -61,11 +65,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.compose.*
 import com.example.wikistormlight.ui.theme.WikiStormlightTheme
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -73,13 +85,60 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val navController: NavHostController = rememberNavController()
+             MyApp(navController)
+        }
+    }
+}
+
+@Composable
+fun MyApp(navController: NavHostController) {
+
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val scope = rememberCoroutineScope()
+
+    NavHost(navController = navController, startDestination = "start") {
+        composable("start") {
             WikiStormlightTheme {
                 Scaffold( modifier = Modifier
                     .fillMaxSize()
                     .systemBarsPadding() ) { innerPadding ->
                     Greeting(
                         name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                        modifier = Modifier.padding(innerPadding),
+                        navController,
+                        drawerState,
+                        scope
+                    )
+                }
+            }
+        }
+        composable("select") {
+            WikiStormlightTheme {
+                Scaffold( modifier = Modifier
+                    .fillMaxSize()
+                    .systemBarsPadding() ) { innerPadding ->
+                    SelectorDePersonaje(
+                        name = "Android",
+                        modifier = Modifier.padding(innerPadding),
+                        navController,
+                        drawerState,
+                        scope
+                    )
+                }
+            }
+        }
+        composable("datos") {
+            WikiStormlightTheme {
+                Scaffold( modifier = Modifier
+                    .fillMaxSize()
+                    .systemBarsPadding() ) { innerPadding ->
+                    PersonajeWiki(
+                        name = "Android",
+                        modifier = Modifier.padding(innerPadding),
+                        navController,
+                        drawerState,
+                        scope
                     )
                 }
             }
@@ -87,12 +146,10 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Greetingh(name: String, modifier: Modifier = Modifier) {
-
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
+fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavController, drawerState: DrawerState, scope: CoroutineScope) {
 
     ModalNavigationDrawer(
         drawerContent = {
@@ -107,7 +164,7 @@ fun Greetingh(name: String, modifier: Modifier = Modifier) {
                     icon = { Icon(imageVector = Icons.Rounded.Person, contentDescription = null) },
                     label = { Text(text = "Personajes", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate("select")},
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -156,7 +213,15 @@ fun Greetingh(name: String, modifier: Modifier = Modifier) {
                         Icon(imageVector = Icons.Rounded.Menu, contentDescription = "Open Navigation Drawer")
                     }
                 },
-                title = {Text("El Archivo de las Tormentas", color = Color.White)} ,
+                title = {
+                    Box(modifier = Modifier.fillMaxWidth()) {
+                        Text(
+                            text = name,
+                            modifier = Modifier.align(Alignment.Center),
+                            color = Color.White
+                        )
+                    }
+                },
                 colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color(0xFF78A0C8)),
                 actions = {
                     // Creating Icon button for dropdown menu
@@ -291,10 +356,7 @@ fun Greetingh(name: String, modifier: Modifier = Modifier) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Greetingd(name: String, modifier: Modifier = Modifier) {
-
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
+fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navController: NavController, drawerState: DrawerState, scope: CoroutineScope) {
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -384,7 +446,7 @@ fun Greetingd(name: String, modifier: Modifier = Modifier) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 56.dp)
+                .padding(top = 64.dp)
         ) {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
@@ -439,10 +501,7 @@ fun Greetingd(name: String, modifier: Modifier = Modifier) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
+fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: NavController, drawerState: DrawerState, scope: CoroutineScope) {
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -495,7 +554,18 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
         val mContext = LocalContext.current
 
-        val nombres = listOf("Kaladin","Sigzil", "Cikatriz", "Teft", "Moash", "Roca", "Hobber", "Dabbid", "Shen", "Lopen")
+        val nombres = listOf(
+            "Kaladin",
+            "Sigzil",
+            "Cikatriz",
+            "Teft",
+            "Moash",
+            "Roca",
+            "Hobber",
+            "Dabbid",
+            "Shen",
+            "Lopen"
+        )
         TopAppBar(
             navigationIcon = {
                 IconButton(onClick = {
@@ -505,7 +575,10 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                         }
                     }
                 }) {
-                    Icon(imageVector = Icons.Rounded.Menu, contentDescription = "Open Navigation Drawer")
+                    Icon(
+                        imageVector = Icons.Rounded.Menu,
+                        contentDescription = "Open Navigation Drawer"
+                    )
                 }
             },
             title = {
@@ -529,51 +602,64 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 ) {}
             }
         )
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(0.dp, 64.dp)
+        Box(modifier = Modifier.padding(0.dp, 64.dp, 0.dp, 0.dp)){
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .padding(0.dp, 20.dp)
             ) {
-            Row (modifier = Modifier.fillMaxWidth()) {
-                Column {
-                    Box(
-                        modifier = Modifier
-                            .width(120.dp)
-                            .height(120.dp)
-                            .clip(RoundedCornerShape(20.dp))
-                            .background(Color.White)
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.shallan),
-                            contentDescription = "Image",
+                Row(modifier = Modifier.fillMaxWidth().height(220.dp)) {
+                    Column(modifier = Modifier.size(200.dp).padding(10.dp)) {
+                        Box(
                             modifier = Modifier
-                                .fillMaxHeight()
+                                .fillMaxSize()
                                 .clip(RoundedCornerShape(20.dp))
-                                .border(5.dp, Color.White, RoundedCornerShape(20.dp)),
-                            contentScale = ContentScale.Crop
-                        )
+                                .background(Color.White)
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.shallan),
+                                contentDescription = "Image",
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .clip(RoundedCornerShape(20.dp))
+                                    .border(5.dp, Color.White, RoundedCornerShape(20.dp)),
+                                contentScale = ContentScale.Crop
+                            )
+                        }
+                    }
+
+                    Column(modifier = Modifier.fillMaxSize()) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(10.dp)
+                                .height(20.dp)
+                                .offset(0.dp, 75.dp)
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(Color.White)
+                                .align(Alignment.Start)
+                        ) {
+                            Text(
+                                "Kabsal",
+                                modifier = Modifier.align(Alignment.Center),
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
                     }
                 }
-                Column {
+                Row(modifier = Modifier.fillMaxSize().padding(10.dp)) {
                     Box(
                         modifier = Modifier
-                            .width(120.dp)
-                            .height(20.dp)
-                            .offset(0.dp, 75.dp)
+                            .fillMaxSize()
                             .clip(RoundedCornerShape(20.dp))
                             .background(Color.White)
-                    ) {
-                        Text(
-                            "Kaladin",
-                            modifier = Modifier.align(Alignment.Center),
-                            fontSize = 13.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
+                    ) { Text(stringResource(R.string.prueba), modifier = Modifier.padding(15.dp)) }
                 }
-            }
             }
         }
+    }
     }
 }
 
@@ -585,6 +671,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     WikiStormlightTheme {
-        Greeting("Personajes")
+        Greeting(
+            "Wikistormlight",
+            navController = rememberNavController(), drawerState = rememberDrawerState(initialValue = DrawerValue.Closed), scope = rememberCoroutineScope()
+        )
     }
 }
