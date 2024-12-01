@@ -1,0 +1,13 @@
+{
+    "characterName": "Tavern Innkeeper",
+    "characterInfo": {
+        "Ethnicity": "Alethi",
+        "Nationality": "Alethi",
+        "Gender": "Male",
+        "Status": "Alive",
+        "Occupation": "Innkeeper",
+        "Appears in": "Oathbringer"
+    },
+    "characterImage": null,
+    "characterDescription": "The tavern innkeeper in Kholinar is a native Alethi."
+}

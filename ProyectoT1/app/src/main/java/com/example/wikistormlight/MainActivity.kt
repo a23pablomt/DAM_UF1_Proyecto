@@ -1,8 +1,10 @@
 package com.example.wikistormlight
 
+import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View.OnClickListener
+import android.widget.ImageView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -65,6 +67,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.BitmapPainter
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -79,9 +83,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.*
+import com.example.wikistormlight.model.controller.Controller
+import com.example.wikistormlight.model.dataclasses.Character
 import com.example.wikistormlight.ui.theme.WikiStormlightTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import java.io.InputStream
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -211,6 +218,10 @@ fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavCont
             var mDisplayMenu by remember { mutableStateOf(false) }
 
             val mContext = LocalContext.current
+
+            val controller = Controller.getInstance(mContext)
+            val nombres = listOf(controller.getCharacter("Dalinar Kholin") ?: Character("Unknown", "Unknown", ""), controller.getCharacter("Shallan Davar") ?: Character("Unknown", "Unknown", ""))
+
             TopAppBar(
                 navigationIcon = {
                     IconButton(onClick = {
@@ -282,7 +293,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavCont
                                 modifier = Modifier
                                     .height(270.dp)
                                     .clickable {
-                                        navController.navigate("datos/Sigzil")
+                                        navController.navigate("datos/${nombres[0].name}")
                                     }
                             ) {
                                 Box(
@@ -294,10 +305,10 @@ fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavCont
                                         .align(Alignment.TopCenter)
                                 ) {
                                     Image(
-                                        painter = painterResource(id = R.drawable.shallan),
+                                        painter = BitmapPainter(controller.readAssetImg(nombres[0].name)),
                                         contentDescription = "Image",
                                         modifier = Modifier
-                                            .fillMaxHeight()
+                                            .fillMaxWidth()
                                             .clip(RoundedCornerShape(20.dp))
                                             .border(5.dp, Color.White, RoundedCornerShape(20.dp)),
                                         contentScale = ContentScale.Crop,
@@ -312,7 +323,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavCont
                                         .align(Alignment.Center)
                                 ) {
                                     Text(
-                                        "Sigzil",
+                                        nombres[0].name,
                                         modifier = Modifier.align(Alignment.Center),
                                         fontSize = 13.sp,
                                         fontWeight = FontWeight.Bold
@@ -325,7 +336,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavCont
                                     modifier = Modifier
                                         .height(270.dp)
                                         .clickable {
-                                            navController.navigate("datos/Kaladin")
+                                            navController.navigate("datos/${nombres[1].name}")
                                         }
                                 ) {
                                     Box(
@@ -338,12 +349,16 @@ fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavCont
 
                                     ) {
                                         Image(
-                                            painter = painterResource(id = R.drawable.shallan),
+                                            painter = BitmapPainter(controller.readAssetImg(nombres[1].name)),
                                             contentDescription = "Image",
                                             modifier = Modifier
-                                                .fillMaxHeight()
+                                                .fillMaxWidth()
                                                 .clip(RoundedCornerShape(20.dp))
-                                                .border(5.dp, Color.White, RoundedCornerShape(20.dp)),
+                                                .border(
+                                                    5.dp,
+                                                    Color.White,
+                                                    RoundedCornerShape(20.dp)
+                                                ),
                                             contentScale = ContentScale.Crop,
                                         )
                                     }
@@ -356,7 +371,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavCont
                                             .align(Alignment.Center)
                                     ) {
                                         Text(
-                                            "Kaladin",
+                                            nombres[1].name,
                                             modifier = Modifier.align(Alignment.Center),
                                             fontSize = 13.sp,
                                             fontWeight = FontWeight.Bold
@@ -426,7 +441,9 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
 
         val mContext = LocalContext.current
 
-        val nombres = listOf("Kaladin","Sigzil", "Cikatriz", "Teft", "Moash", "Roca", "Hobber", "Dabbid", "Shen", "Lopen")
+        val controller = Controller.getInstance(mContext)
+        val nombres = listOf(controller.getCharacter("Kabsal") ?: Character("Unknown", "Unknown", ""), controller.getCharacter("Sigzil") ?: Character("Unknown", "Unknown", ""))
+
         TopAppBar(
             navigationIcon = {
                 IconButton(onClick = {
@@ -475,7 +492,7 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
                             .fillMaxSize()
                             .padding(0.dp, 30.dp)
                             .clickable {
-                                navController.navigate("datos/${nombres[index]}")
+                                navController.navigate("datos/${nombres[index].name}")
                             }
                     ) {
                         Box(
@@ -487,10 +504,11 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
                                 .align(Alignment.TopCenter)
                         ) {
                             Image(
-                                painter = painterResource(id = R.drawable.shallan),
+                                painter = BitmapPainter(controller.readAssetImg(nombres[index].name)),
                                 contentDescription = "Image",
                                 modifier = Modifier
-                                    .fillMaxHeight()
+                                    .fillMaxWidth()
+                                    .align(Alignment.Center)
                                     .clip(RoundedCornerShape(20.dp))
                                     .border(5.dp, Color.White, RoundedCornerShape(20.dp)),
                                 contentScale = ContentScale.Crop
@@ -506,7 +524,7 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
                                 .align(Alignment.Center)
                         ) {
                             Text(
-                                nombres[index],
+                                nombres[index].name,
                                 modifier = Modifier.align(Alignment.Center),
                                 fontSize = 13.sp,
                                 fontWeight = FontWeight.Bold
@@ -574,18 +592,9 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
 
         val mContext = LocalContext.current
 
-        val nombres = listOf(
-            "Kaladin",
-            "Sigzil",
-            "Cikatriz",
-            "Teft",
-            "Moash",
-            "Roca",
-            "Hobber",
-            "Dabbid",
-            "Shen",
-            "Lopen"
-        )
+        val controller = Controller.getInstance(mContext)
+        val nombre = controller.getCharacter(name) ?: Character("Unknown", "Unknown", "")
+
         TopAppBar(
             navigationIcon = {
                 IconButton(onClick = {
@@ -629,8 +638,12 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                     .verticalScroll(rememberScrollState())
                     .padding(0.dp, 20.dp)
             ) {
-                Row(modifier = Modifier.fillMaxWidth().height(220.dp)) {
-                    Column(modifier = Modifier.size(200.dp).padding(10.dp)) {
+                Row(modifier = Modifier
+                    .fillMaxWidth()
+                    .height(220.dp)) {
+                    Column(modifier = Modifier
+                        .size(200.dp)
+                        .padding(10.dp)) {
                         Box(
                             modifier = Modifier
                                 .fillMaxSize()
@@ -638,10 +651,10 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                                 .background(Color.White)
                         ) {
                             Image(
-                                painter = painterResource(id = R.drawable.shallan),
+                                painter = BitmapPainter(controller.readAssetImg(nombre.name)),
                                 contentDescription = "Image",
                                 modifier = Modifier
-                                    .fillMaxSize()
+                                    .fillMaxWidth()
                                     .clip(RoundedCornerShape(20.dp))
                                     .border(5.dp, Color.White, RoundedCornerShape(20.dp)),
                                 contentScale = ContentScale.Crop
@@ -661,7 +674,7 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                                 .align(Alignment.Start)
                         ) {
                             Text(
-                                "Kabsal",
+                                nombre.name,
                                 modifier = Modifier.align(Alignment.Center),
                                 fontSize = 13.sp,
                                 fontWeight = FontWeight.Bold
@@ -669,13 +682,15 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                         }
                     }
                 }
-                Row(modifier = Modifier.fillMaxSize().padding(10.dp)) {
+                Row(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(10.dp)) {
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
                             .clip(RoundedCornerShape(20.dp))
                             .background(Color.White)
-                    ) { Text(stringResource(R.string.prueba), modifier = Modifier.padding(15.dp)) }
+                    ) { nombre.description?.let { Text(it, modifier = Modifier.padding(15.dp)) } }
                 }
             }
         }

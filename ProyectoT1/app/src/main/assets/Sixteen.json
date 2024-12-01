@@ -1,0 +1,14 @@
+{
+    "characterName": "Sixteen",
+    "characterInfo": {
+        "Race": "Human",
+        "Ethnicity": "Scadrian",
+        "Nationality": "Scadrian",
+        "Gender": "Male",
+        "Status": "Alive",
+        "Abilities": "Worldhopper",
+        "Appears in": "Rhythm of War"
+    },
+    "characterImage": null,
+    "characterDescription": "Sixteen is a Scadrian Worldhopper living in Lasting Integrity in Shadesmar."
+}
