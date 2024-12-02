@@ -1,10 +1,7 @@
 package com.example.wikistormlight
 
-import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
-import android.view.View.OnClickListener
-import android.widget.ImageView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -12,11 +9,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,7 +20,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
@@ -68,11 +62,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.BitmapPainter
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -82,13 +74,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.compose.*
 import com.example.wikistormlight.model.controller.Controller
 import com.example.wikistormlight.model.dataclasses.Character
+import com.example.wikistormlight.model.deserializators.CharacterListCreator
 import com.example.wikistormlight.ui.theme.WikiStormlightTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import java.io.InputStream
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -166,7 +157,7 @@ fun MyApp(navController: NavHostController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavController, drawerState: DrawerState, scope: CoroutineScope) {
+fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavController, drawerState: DrawerState, scope: CoroutineScope) {
 
     ModalNavigationDrawer(
         drawerContent = {
@@ -220,7 +211,8 @@ fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavCont
             val mContext = LocalContext.current
 
             val controller = Controller.getInstance(mContext)
-            val nombres = listOf(controller.getCharacter("Dalinar Kholin") ?: Character("Unknown", "Unknown", ""), controller.getCharacter("Shallan Davar") ?: Character("Unknown", "Unknown", ""))
+            val nombres = listOf(controller.getCharacter("Abrial") ?: Character("Unknown", "Unknown", "Uknown","Uknown", null,  ""),
+                controller.getCharacter("Shallan Davar") ?: Character("Unknown", "Unknown", "Unknown","Uknown", null, ""))
 
             TopAppBar(
                 navigationIcon = {
@@ -237,7 +229,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavCont
                 title = {
                     Box(modifier = Modifier.fillMaxWidth()) {
                         Text(
-                            text = name,
+                            text = named,
                             modifier = Modifier.align(Alignment.Center),
                             color = Color.White
                         )
@@ -245,12 +237,10 @@ fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavCont
                 },
                 colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color(0xFF78A0C8)),
                 actions = {
-                    // Creating Icon button for dropdown menu
                     IconButton(onClick = { mDisplayMenu = !mDisplayMenu }) {
                         Icon(Icons.Default.MoreVert, "")
                     }
 
-                    // Creating a dropdown menu
                     DropdownMenu(
                         expanded = mDisplayMenu,
                         onDismissRequest = { mDisplayMenu = false }
@@ -275,7 +265,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier, navController: NavCont
                     active = false,
                     onActiveChange = {},
                     placeholder = {
-                        Text(text = "Buscar...")
+                        Text(text = "Search...")
                     },
                     trailingIcon = {
                         Icon(imageVector = Icons.Default.Search, contentDescription = null)
@@ -442,7 +432,15 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
         val mContext = LocalContext.current
 
         val controller = Controller.getInstance(mContext)
-        val nombres = listOf(controller.getCharacter("Kabsal") ?: Character("Unknown", "Unknown", ""), controller.getCharacter("Sigzil") ?: Character("Unknown", "Unknown", ""))
+        val lista = CharacterListCreator().createCharacterList(controller.readAssetFile("characters"))
+        val nombres = mutableListOf<Character>()
+        for (i in lista){
+            val pj = controller.getCharacter(i) ?: Character("None", "None", "None","Uknown", null, "")
+            if ((pj).img != "null"){
+                nombres.add(pj)
+            }
+        }
+
 
         TopAppBar(
             navigationIcon = {
@@ -593,7 +591,7 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
         val mContext = LocalContext.current
 
         val controller = Controller.getInstance(mContext)
-        val nombre = controller.getCharacter(name) ?: Character("Unknown", "Unknown", "")
+        val nombre = controller.getCharacter(name) ?: Character("Unknown", "Unknown", "Unknown","Uknown", null, "")
 
         TopAppBar(
             navigationIcon = {
@@ -668,13 +666,65 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                                 .fillMaxWidth()
                                 .padding(10.dp)
                                 .height(20.dp)
-                                .offset(0.dp, 75.dp)
+                                .offset(0.dp, 35.dp)
                                 .clip(RoundedCornerShape(20.dp))
                                 .background(Color.White)
                                 .align(Alignment.Start)
                         ) {
                             Text(
                                 nombre.name,
+                                modifier = Modifier.align(Alignment.Center),
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(10.dp)
+                                .height(20.dp)
+                                .offset(0.dp, 50.dp)
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(Color.LightGray)
+                                .align(Alignment.Start)
+                        ) {
+                            Text(
+                                "Etnithity: "+nombre.etnithity,
+                                modifier = Modifier.align(Alignment.Center),
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(10.dp)
+                                .height(20.dp)
+                                .offset(0.dp, 45.dp)
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(Color.LightGray)
+                                .align(Alignment.Start)
+                        ) {
+                            Text(
+                                "Nationality: "+nombre.nationality,
+                                modifier = Modifier.align(Alignment.Center),
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(10.dp)
+                                .height(20.dp)
+                                .offset(0.dp, 40.dp)
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(Color.LightGray)
+                                .align(Alignment.Start)
+                        ) {
+                            Text(
+                                "Gender: "+nombre.gender,
                                 modifier = Modifier.align(Alignment.Center),
                                 fontSize = 13.sp,
                                 fontWeight = FontWeight.Bold
@@ -707,7 +757,7 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
 fun GreetingPreview() {
     WikiStormlightTheme {
         Greeting(
-            "Wikistormlight",
+            "Kabsal",
             navController = rememberNavController(), drawerState = rememberDrawerState(initialValue = DrawerValue.Closed), scope = rememberCoroutineScope()
         )
     }
