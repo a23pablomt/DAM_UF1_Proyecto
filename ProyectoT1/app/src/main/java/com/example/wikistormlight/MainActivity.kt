@@ -66,6 +66,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -117,18 +118,19 @@ fun MyApp(navController: NavHostController) {
                 }
             }
         }
-        composable("select/{tipo}") { backStackEntry ->
+        composable("select/{name}/{tipo}") { backStackEntry ->
             WikiStormlightTheme {
                 Scaffold( modifier = Modifier
                     .fillMaxSize()
                     .systemBarsPadding() ) { innerPadding ->
-                    backStackEntry.arguments?.getString("tipo")?.let {
+                    backStackEntry.arguments?.getString("name")?.let {
                         SelectorDePersonaje(
                             it,
                             modifier = Modifier.padding(innerPadding),
                             navController,
                             drawerState,
-                            scope
+                            scope,
+                            backStackEntry.arguments!!.getInt("tipo")
                         )
                     }
                 }
@@ -172,7 +174,7 @@ fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavCo
                     icon = { Icon(imageVector = Icons.Rounded.Person, contentDescription = null) },
                     label = { Text(text = "Personajes", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { navController.navigate("select/Personajes") },
+                    onClick = { navController.navigate("select/Personajes/1") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -256,20 +258,23 @@ fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavCo
                         .width(300.dp)
                         .height(200.dp)
                 )
+                var query by remember { mutableStateOf("") } // Estado que guarda el texto de búsqueda
+                var isActive by remember { mutableStateOf(false) } // Estado para gestionar la activación de la SearchBar
                 SearchBar(modifier = Modifier
                     .width(300.dp)
                     .offset(0.dp, (-120).dp),
-                    query = "",
-                    onQueryChange = {},
-                    onSearch = {},
-                    active = false,
-                    onActiveChange = {},
-                    placeholder = {
-                        Text(text = "Search...")
+                    query = query,
+                    onQueryChange = { newQuery -> query = newQuery }, // Actualizar query cuando cambia
+                    onSearch = {
+                        navController.navigate("select/$query/0")
                     },
+                    active = isActive, // Establecer activo para permitir la escritura
+                    onActiveChange = { isActive = it }, // Cambiar el estado activo cuando cambie
+                    placeholder = { Text(text = "Search...") },
                     trailingIcon = {
-                        Icon(imageVector = Icons.Default.Search, contentDescription = null)
-                    }) {}
+                        Icon(imageVector = Icons.Default.Search, contentDescription = "Search")
+                    }
+                ) {}
                 Row(modifier = Modifier
                     .width(300.dp)
                     .height(200.dp)
@@ -378,7 +383,7 @@ fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavCo
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navController: NavController, drawerState: DrawerState, scope: CoroutineScope) {
+fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navController: NavController, drawerState: DrawerState, scope: CoroutineScope, tipo: Int) {
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -432,12 +437,33 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
         val mContext = LocalContext.current
 
         val controller = Controller.getInstance(mContext)
+
+        
+
         val lista = CharacterListCreator().createCharacterList(controller.readAssetFile("characters"))
         val nombres = mutableListOf<Character>()
-        for (i in lista){
-            val pj = controller.getCharacter(i) ?: Character("None", "None", "None","Uknown", null, "")
-            if ((pj).img != "null"){
-                nombres.add(pj)
+        when (tipo) {
+            0 -> {
+                for (i in lista){
+                    val pj = controller.getCharacter(i) ?: Character("None", "None", "None","Uknown", null, "")
+                    if ((pj).name.lowercase().contains(name.lowercase())){
+                        nombres.add(pj)
+                    }
+                }
+            }
+            1 -> {
+                for (i in lista){
+                    val pj = controller.getCharacter(i) ?: Character("None", "None", "None","Uknown", null, "")
+                    if ((pj).img != "null"){
+                        nombres.add(pj)
+                    }
+                }
+            }
+            else -> {
+                for (i in lista){
+                    val pj = controller.getCharacter(i) ?: Character("None", "None", "None","Uknown", null, "")
+                    nombres.add(pj)
+                }
             }
         }
 
@@ -457,7 +483,7 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
             title = {
                 Box(modifier = Modifier.fillMaxWidth()) {
                     Text(
-                        text = name,
+                        text = "\""+name+"\"",
                         modifier = Modifier.align(Alignment.Center),
                         color = Color.White
                     )
