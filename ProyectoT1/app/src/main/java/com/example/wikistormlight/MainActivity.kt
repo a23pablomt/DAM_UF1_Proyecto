@@ -124,14 +124,16 @@ fun MyApp(navController: NavHostController) {
                     .fillMaxSize()
                     .systemBarsPadding() ) { innerPadding ->
                     backStackEntry.arguments?.getString("name")?.let {
-                        SelectorDePersonaje(
-                            it,
-                            modifier = Modifier.padding(innerPadding),
-                            navController,
-                            drawerState,
-                            scope,
-                            backStackEntry.arguments!!.getInt("tipo")
-                        )
+                        backStackEntry.arguments!!.getString("tipo")?.toInt()?.let { it1 ->
+                            SelectorDePersonaje(
+                                it,
+                                modifier = Modifier.padding(innerPadding),
+                                navController,
+                                drawerState,
+                                scope,
+                                it1
+                            )
+                        }
                     }
                 }
             }
@@ -182,7 +184,7 @@ fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavCo
                     icon = { Icon(imageVector = Icons.Rounded.AddCircle, contentDescription = null) },
                     label = { Text(text = "Grupos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { navController.navigate("select/Grupos") },
+                    onClick = { navController.navigate("select/Grupos/3") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -258,7 +260,7 @@ fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavCo
                         .width(300.dp)
                         .height(200.dp)
                 )
-                var query by remember { mutableStateOf("") } // Estado que guarda el texto de búsqueda
+                var query by remember { mutableStateOf("") }
                 var isActive by remember { mutableStateOf(false) } // Estado para gestionar la activación de la SearchBar
                 SearchBar(modifier = Modifier
                     .width(300.dp)
@@ -268,7 +270,7 @@ fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavCo
                     onSearch = {
                         navController.navigate("select/$query/0")
                     },
-                    active = isActive, // Establecer activo para permitir la escritura
+                    active = false, // Establecer activo para permitir la escritura
                     onActiveChange = { isActive = it }, // Cambiar el estado activo cuando cambie
                     placeholder = { Text(text = "Search...") },
                     trailingIcon = {
@@ -383,7 +385,7 @@ fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavCo
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navController: NavController, drawerState: DrawerState, scope: CoroutineScope, tipo: Int) {
+fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navController: NavController, drawerState: DrawerState, scope: CoroutineScope, tipoPantalla: Int) {
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -399,7 +401,7 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
                     icon = { Icon(imageVector = Icons.Rounded.Person, contentDescription = null) },
                     label = { Text(text = "Personajes", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { navController.navigate("select/Personajes") },
+                    onClick = { navController.navigate("select/Personajes/1") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -442,7 +444,7 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
 
         val lista = CharacterListCreator().createCharacterList(controller.readAssetFile("characters"))
         val nombres = mutableListOf<Character>()
-        when (tipo) {
+        when (tipoPantalla) {
             0 -> {
                 for (i in lista){
                     val pj = controller.getCharacter(i) ?: Character("None", "None", "None","Uknown", null, "")
@@ -483,7 +485,7 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
             title = {
                 Box(modifier = Modifier.fillMaxWidth()) {
                     Text(
-                        text = "\""+name+"\"",
+                        text = (if(tipoPantalla == 0){"\""+name+"\""} else {name}),
                         modifier = Modifier.align(Alignment.Center),
                         color = Color.White
                     )
@@ -579,7 +581,7 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                     icon = { Icon(imageVector = Icons.Rounded.Person, contentDescription = null) },
                     label = { Text(text = "Personajes", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { navController.navigate("select/Personajes") },
+                    onClick = { navController.navigate("select/Personajes/1") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
