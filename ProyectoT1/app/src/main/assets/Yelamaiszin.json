@@ -10,5 +10,19 @@
         "Appears in": "Dawnshard"
     },
     "characterImage": null,
-    "characterDescription": "Yelamaiszin is eldest - and First - amongst the Sleepless.\r\n"
+    "characterDescription": "Yelamaiszin is eldest - and First - amongst the Sleepless.\r\n",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "",
+        "Trivia": ""
+    }
 }

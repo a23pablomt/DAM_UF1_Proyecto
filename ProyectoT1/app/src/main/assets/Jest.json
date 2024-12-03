@@ -10,5 +10,19 @@
         "Appears in": "The Way of Kings"
     },
     "characterImage": null,
-    "characterDescription": "Jest is a darkeyed Alethi farmer living in Hearthstone. Jest's brother is Jost. Their father was a soldier who claimed that he'd won a Shardblade and was cheated out of it.\r\n"
+    "characterDescription": "Jest is a darkeyed Alethi farmer living in Hearthstone. Jest's brother is Jost. Their father was a soldier who claimed that he'd won a Shardblade and was cheated out of it.\r\n",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "",
+        "Trivia": ""
+    }
 }

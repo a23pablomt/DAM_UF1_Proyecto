@@ -28,16 +28,13 @@ class Controller private constructor(private val context: Context) {  // Pasamos
 
     fun readAssetImg(fileName: String): ImageBitmap {
         try {
-            // Comprobamos si el personaje tiene una imagen asociada
             val character = getCharacter(fileName)
 
-            // Si el personaje tiene imagen asociada y el archivo existe, lo cargamos
             if (character?.img != null && fileExistsInAssets("${fileName}.jpg")) {
                 val algo = context.assets.open("${fileName}.jpg")
                 val bitmap = BitmapFactory.decodeStream(algo)
                 return bitmap.asImageBitmap()
             } else {
-                // Si no existe la imagen del personaje, se carga una imagen por defecto
                 val algo = context.assets.open("choose_order.webp")
                 val bitmap = BitmapFactory.decodeStream(algo)
                 return bitmap.asImageBitmap()

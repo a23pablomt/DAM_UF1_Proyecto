@@ -6,5 +6,6 @@ data class Character(
     val nationality: String?,
     val gender: String?,
     val img: String?,
+    val book: String?,
     val description: String?
 )

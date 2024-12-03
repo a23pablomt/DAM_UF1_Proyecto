@@ -5,11 +5,25 @@
         "Nationality": "Alethi",
         "Gender": "Male",
         "Status": "Dead",
-        "Aliases": "Sadees[1]",
+        "Aliases": "Sadees",
         "Title(s)": "King of Alethkar",
         "Occupation": "King",
         "Appears in": "The Way of Kings (mentioned),  Oathbringer (mentioned),  Rhythm of War (mentioned)"
     },
     "characterImage": null,
-    "characterDescription": "Sunmaker was the last Alethi king before Gavilar to unite the highprinces (about 500 years ago). He began his quest to do so at the age of seventeen, and was responsible for casting down the Hierocracy. He inspired Gavilar, who revered him, but who hoped his own accomplishments wouldn't be as ephemeral as those of Sunmaker."
+    "characterDescription": "Sunmaker was the last Alethi king before Gavilar to unite the highprinces (about 500 years ago). He began his quest to do so at the age of seventeen, and was responsible for casting down the Hierocracy. He inspired Gavilar, who revered him, but who hoped his own accomplishments wouldn't be as ephemeral as those of Sunmaker.",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "",
+        "Personality": "",
+        "History": "Though he united Alethkar, he failed to create a lasting empire. Dalinar said it was because his children were too greedy, or possibly too weak. That there wasn't one of them that the others would agree to support. Navani said they might have united, if the Sunmaker himself could have been bothered to settle on an heir. That it was his fault. To that, Gavilar responded that Sunmaker was off in the west, leading his army to further glory. That Alethkar and Herdaz weren't enough for him. That he wanted the whole world. Sadeas said that it was his ambition. Gavilar then said that it was his greed, but that the point of conquering is to sit back and enjoy it, even though Sunmaker stretched farther and farther until he collapsed.",
+        "Beliefs": "",
+        "Characteristics": "All Alethi people are his descendants. All houses, all ten princedoms. Their founders were his sons.\r\nSigns of his touch remain in Alethkar, but his empire didn't last even a single generation past his death.\r\nSunmaker hadn't worn a crown.\r\nHe had famously used an entire company of cavalry because over a short distance, their speed and maneuverability had been legendary.",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "According to Brandon, the Sunmaker was basically his version of an Alexander the Great, or maybe a better example would've been Genghis Khan or somebody like that. One of the great warlords of the past.",
+        "Trivia": ""
+    }
 }

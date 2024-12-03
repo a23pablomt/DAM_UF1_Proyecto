@@ -35,6 +35,7 @@ class JSONDeserializerCharacter : JsonDeserializer<Character> {
             } else {
                 "null"
             },
+            book = characterInfo?.get("Appears in")?.asString ?: "Unknown",
             description = jsonObject.get("characterDescription")?.asString ?: "Unknown"
         )
 

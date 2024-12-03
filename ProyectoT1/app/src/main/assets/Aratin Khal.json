@@ -5,9 +5,23 @@
         "Nationality": "Alethi",
         "Gender": "Male",
         "Status": "Unknown",
-        "Family": "Khal (father), Teshav (mother),  Halam (brother), Meleran (brother), Idani (cousin)[1]",
+        "Family": "Khal (father), Teshav (mother),  Halam (brother), Meleran (brother), Idani (cousin)",
         "Appears in": "Oathbringer"
     },
     "characterImage": null,
-    "characterDescription": "Aratin Khal is the younger brother of Halam and the older brother of Meleran.\r\nHe participates in a wrestling match with Dalinar."
+    "characterDescription": "Aratin Khal is the younger brother of Halam and the older brother of Meleran.\r\nHe participates in a wrestling match with Dalinar.",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "",
+        "Trivia": ""
+    }
 }

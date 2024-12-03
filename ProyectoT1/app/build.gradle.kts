@@ -59,8 +59,14 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation("org.jsoup:jsoup:1.16.1")
     implementation("com.google.code.gson:gson:2.10.1")
-    implementation ("androidx.compose.material3:material3:1.0.0")  // Asegúrate de tener la versión más reciente
-    implementation ("androidx.compose.ui:ui:1.4.0")  // La versión más reciente de Compose
-    implementation ("androidx.compose.material3:material3-window-size-class:1.0.0") // Si es necesario
+    implementation ("androidx.compose.material3:material3:1.0.0")
+    implementation ("androidx.compose.ui:ui:1.4.0")
+    implementation ("androidx.compose.material3:material3-window-size-class:1.0.0")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
+    implementation ("androidx.activity:activity-compose:1.7.0")
+    implementation ("androidx.compose.ui:ui:1.4.0")
+    implementation ("androidx.compose.material:material:1.4.0")
+    implementation ("androidx.compose.ui:ui-tooling-preview:1.4.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
 }

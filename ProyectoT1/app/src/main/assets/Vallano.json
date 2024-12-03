@@ -5,9 +5,23 @@
         "Nationality": "Shin",
         "Gender": "Male",
         "Status": "Dead",
-        "Family": "Neturo (son), Szeth (grandson),  Elid (granddaughter)[1]",
+        "Family": "Neturo (son), Szeth (grandson),  Elid (granddaughter)",
         "Appears in": "The Way of Kings (mentioned)"
     },
     "characterImage": null,
-    "characterDescription": "Vallano was a Shin. He fathered Neturo, who fathered Szeth.\r\n"
+    "characterDescription": "Vallano was a Shin. He fathered Neturo, who fathered Szeth.\r\n",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "",
+        "Trivia": ""
+    }
 }

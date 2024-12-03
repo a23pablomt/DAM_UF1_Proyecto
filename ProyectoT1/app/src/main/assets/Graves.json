@@ -13,5 +13,19 @@
         "Appears in": "Words of Radiance, Oathbringer"
     },
     "characterImage": null,
-    "characterDescription": "Graves was a lighteyed Alethi soldier and commander. He calls himself a patriot, yet is a member of a conspiracy to assassinate King Elhokar."
+    "characterDescription": "Graves was a lighteyed Alethi soldier and commander. He calls himself a patriot, yet is a member of a conspiracy to assassinate King Elhokar.",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "Graves is a little older than Adolin, with jet-black Alethi hair, styled crisply. He wears an open jacket, an expensive-looking black shirt underneath that is embroidered with white vines running between the buttons, and a stock at his throat.",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "Given Graves' knowledge of the Diagram and his intention to bring another Shardbearer (i.e., Moash) back with him to (likely) Taravangian, it seems that he has been an agent of Taravangian all along.\r\nGraves married a dark-eyed woman and, \"One of his sons is even a one eye.\"*  This description matches the \"the newcomer\" Redin, sent by Highprince Valam, who confronted Shallan's father about the death of Shallan's mother, four years prior to Kaladin's introduction to Graves.  Shallan proclaims that Redin is the bastard son of Valam.\r\n*The description, 'has one light eye, the other dark', is so rare and is the apparent trait of a lighteyes interbreeding with a darkeyes. The condition is known as heterochromia.",
+        "Trivia": ""
+    }
 }

@@ -4,12 +4,26 @@
         "Race": "Spren",
         "Ethnicity": "Unknown",
         "Nationality": "Shadesmar",
-        "Gender": "Neutral[1]",
+        "Gender": "Neutral",
         "Status": "Alive",
         "Abilities": "Nahel bonding, affording Surgebinding",
         "Title(s)": "Unknown",
         "Appears in": "Oathbringer (mentioned),  Rhythm of War"
     },
     "characterImage": null,
-    "characterDescription": "The Sibling is the third of three super-spren - akin to the Stormfather and the Nightwatcher - associated with the order of Knights Radiant known as Bondsmiths. They have gone into hiding for reasons unknown.\r\nA series of related records left by an Elsecaller in Urithiru's library drawers of the gem archive there, link the Sibling to the health of the tower city. The entries relate the decline of the tower's functionality (particularly with respect to habitation failures) and to the withdrawal of the Sibling. The author argues that the spren's disappearance was neither intentional nor a result of internal strife amongst the Knights Radiant."
+    "characterDescription": "The Sibling is the third of three super-spren - akin to the Stormfather and the Nightwatcher - associated with the order of Knights Radiant known as Bondsmiths. They have gone into hiding for reasons unknown.\r\nA series of related records left by an Elsecaller in Urithiru's library drawers of the gem archive there, link the Sibling to the health of the tower city. The entries relate the decline of the tower's functionality (particularly with respect to habitation failures) and to the withdrawal of the Sibling. The author argues that the spren's disappearance was neither intentional nor a result of internal strife amongst the Knights Radiant.",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "",
+        "Personality": "",
+        "History": "In the millenia since the abandonment of Urithiru and the Recreance, according to the Stormfather (who refuses to reveal more information because of the way his siblings were harmed by humankind in the past), the Sibling has been \"slumbering.\"\r\nThe Sibling is a child of both Honor and Cultivation. They hadn't been able to make the tower function any longer because something had happened to the tower's Light.\r\nThe Sibling resides in the basement of the crystal pillar of Urithiru, and controls the functions and defenses of that tower. They are also now bonded to Navani.",
+        "Beliefs": "",
+        "Characteristics": "That the Sibling is referred to as 'they' by the Stormfather points to it being gender neutral\/non-binary, unlike each the Stormfather and the Nightwatcher (who are male and female, respectively). According to Brandon, the Sibling did not view themself as male or female. (And considered it odd that so many spren would adopt human genders.)*\r\nBrandon has stated that the Sibling is very relevant.\r\nThe Sibling calls Raboniel \"The Lady of Pain\", as she was originally known thousands of years ago.\r\nAlso according to Brandon, it's currently outside the realm of plausibility for the Sibling to become a Blade for its Bondsmith (i.e., Navani) but not impossible.",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "The source from within the library drawers speaks of the Sibling in the present tense, and also talks about dealing with the Unmade. Sja-anat tells Shallan that \"We were made, then unmade.\"  Perhaps the three super-spren were created similarly.\r\nThere are those who think that Urithiru is the Sibling, as the city is described as being a living thing by the Stormfather that is now just asleep. Also there are long tendrils of gemstones in the heart of the tower that Navani says would be used for Soulcasting the essence of blood,[citation\u00a0needed] which some believe are like the veins of the tower.",
+        "Notes": "*In a later Q&A, Brandon referred to the Sibling as \"he\".",
+        "Trivia": ""
+    }
 }

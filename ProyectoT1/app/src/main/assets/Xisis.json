@@ -9,5 +9,19 @@
         "Appears in": "Unknown"
     },
     "characterImage": null,
-    "characterDescription": "Xisis is currently hanging out on a planet quite near to where one can find a lot of the aethers."
+    "characterDescription": "Xisis is currently hanging out on a planet quite near to where one can find a lot of the aethers.",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "He is not human.",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "Xisis could potentially be a dragon.",
+        "Notes": "",
+        "Trivia": ""
+    }
 }

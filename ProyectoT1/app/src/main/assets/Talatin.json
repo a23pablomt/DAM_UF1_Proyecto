@@ -10,5 +10,19 @@
         "Appears in": "The Way of Kings"
     },
     "characterImage": null,
-    "characterDescription": "Talatin was a Knight Radiant of the order of Stonewards on Roshar."
+    "characterDescription": "Talatin was a Knight Radiant of the order of Stonewards on Roshar.",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "",
+        "Trivia": ""
+    }
 }

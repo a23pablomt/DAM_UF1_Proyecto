@@ -6,9 +6,23 @@
         "Gender": "Male",
         "Status": "Alive",
         "Abilities": "Worldhopper",
-        "Family": "Malli (wife)[1]",
+        "Family": "Malli (wife)",
         "Appears in": "Mistborn: The Final Empire, Mistborn: The Well of Ascension, Oathbringer, Rhythm of War"
     },
     "characterImage": null,
-    "characterDescription": "Felt is a Scadrian Worldhopper."
+    "characterDescription": "Felt is a Scadrian Worldhopper.",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "He is described as a lithe man with long, drooping mustaches and pale skin. Judging by his eyes, he is thought to have some Shin blood in him.\r\nHe is a short man who barely comes up to the middle of Dalinar's chest.",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "He is not a secret agent.\r\nWhen Felt moves he goes by the same name, unlike some other characters in the cosmere such as Zahel and Azure.",
+        "Character": "He is logical and resourceful. He appears to be loyal to the lords that he serves, and enjoys taking on any tasks to which he is assigned.",
+        "Abilities": "As a worldhopper, he's been a member of various groups over the years. His motivations and allegiances have shifted at different points in his life, and he has sometimes been a \"rogue agent\" in the cosmere.",
+        "Relationships": "",
+        "Speculation": "There are some readers who think that Felt is the kandra about whom Brandon has spoken that is present on Roshar. One has cited a passage in Mistborn: The Final Empire in which it is indicated that Felt is, notably for his kind, lithe and nimble.",
+        "Notes": "",
+        "Trivia": ""
+    }
 }

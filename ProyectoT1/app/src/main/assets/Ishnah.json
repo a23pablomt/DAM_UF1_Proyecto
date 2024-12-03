@@ -6,9 +6,23 @@
         "Gender": "Female",
         "Status": "Alive",
         "Abilities": "Surgebinding (Lightweaving)",
-        "Occupation": "Thief, Spy,  Member of the Unseen Court[1]",
+        "Occupation": "Thief, Spy,  Member of the Unseen Court",
         "Appears in": "Oathbringer, Rhythm of War"
     },
     "characterImage": null,
-    "characterDescription": "Ishnah is one of the thieves that Veil had approached at All's Alley, the one whose eyes had lit up when she'd carved the symbol for the Ghostbloods into the table at which they were meeting.\r\nLater, she introduces herself to Veil as an excellent writer, one who can take dictations. She claims to have experience moving in the market underground in the city of Urithiru.\r\nShe tells Veil that she wants to join her organization, to which Veil responds that they are not recruiting. Still, she pleads with her:"
+    "characterDescription": "Ishnah is one of the thieves that Veil had approached at All's Alley, the one whose eyes had lit up when she'd carved the symbol for the Ghostbloods into the table at which they were meeting.\r\nLater, she introduces herself to Veil as an excellent writer, one who can take dictations. She claims to have experience moving in the market underground in the city of Urithiru.\r\nShe tells Veil that she wants to join her organization, to which Veil responds that they are not recruiting. Still, she pleads with her:",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "Ishnah is a short, young woman who wears a brown havah.\r\nShe has straight Alethi hair, dark brown eyes, bright red painted lips, and sharp black eyebrows enhanced with makeup. Veil recognizes her, and sees that she is shorter than she'd seemed while sitting down.",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "",
+        "Trivia": ""
+    }
 }

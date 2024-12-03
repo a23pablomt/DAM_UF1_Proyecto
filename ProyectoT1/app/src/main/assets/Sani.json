@@ -8,5 +8,19 @@
         "Appears in": "The Way of Kings"
     },
     "characterImage": null,
-    "characterDescription": "Sani is a young woman from Hearthstone who needed surgery on her freehand."
+    "characterDescription": "Sani is a young woman from Hearthstone who needed surgery on her freehand.",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "",
+        "Trivia": ""
+    }
 }

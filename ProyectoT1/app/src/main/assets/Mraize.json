@@ -1,11 +1,11 @@
 {
     "characterName": "Mraize",
     "characterInfo": {
-        "Ethnicity": "Thaylen[1]",
-        "Nationality": "Rosharan[2]",
+        "Ethnicity": "Thaylen",
+        "Nationality": "Rosharan",
         "Gender": "Male",
         "Status": "Alive",
-        "Abilities": "Worldhopper[3]",
+        "Abilities": "Worldhopper",
         "Hair Color": "Jet-Black",
         "Eye Color": "Light Violet",
         "Aliases": "Mraize",
@@ -13,5 +13,19 @@
         "Appears in": "Words of Radiance, Oathbringer, Rhythm of War"
     },
     "characterImage": "https:\/\/static.wikia.nocookie.net\/stormlightarchive\/images\/4\/44\/Mraize.jpg\/revision\/latest\/scale-to-width-down\/200?cb=20150811063541",
-    "characterDescription": "Mraize is a member of the Ghostbloods who appears, at first, to be a leader within the organization. (It is later revealed by Iyatil that he is her student.)\r\nHe is pursued by Shallan, who hopes to infiltrate the secret society, due to both her father's and Brother Kabsal's involvement within it. Mraize tests Shallan (as Veil, by which name she chooses to be known within his circle of influence) by setting her to the task (supposedly, through her mistress, Tyn) of breaking into Amaram's manor to investigate therein and learn his hidden secrets.\r\nLater, when Mraize inspects his Azish cavalrylord's suit, he tells his laundress Mem that she is a genius in having removed the aether from it. As he has already accurately identified her new laundry assistant (i.e., Pom) as Shalash, he then tells Mem that she'll now have to find a new wash-girl."
+    "characterDescription": "Mraize is a member of the Ghostbloods who appears, at first, to be a leader within the organization. (It is later revealed by Iyatil that he is her student.)\r\nHe is pursued by Shallan, who hopes to infiltrate the secret society, due to both her father's and Brother Kabsal's involvement within it. Mraize tests Shallan (as Veil, by which name she chooses to be known within his circle of influence) by setting her to the task (supposedly, through her mistress, Tyn) of breaking into Amaram's manor to investigate therein and learn his hidden secrets.\r\nLater, when Mraize inspects his Azish cavalrylord's suit, he tells his laundress Mem that she is a genius in having removed the aether from it. As he has already accurately identified her new laundry assistant (i.e., Pom) as Shalash, he then tells Mem that she'll now have to find a new wash-girl.",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "Mraize is described as being straight-backed, with jet-black hair, light violet eyes, and a scarred face (old wounds including a scar which runs down his cheek and deforms his upper lip). Initially, he reminds Shallan of what she remembers of her childhood encounter with Hoid (i.e., the messenger with the smiling eyes, the enigma who knew so much).\r\nWhile Hoid had been dressed all in black, Mraize wears all white. While Mraize looks refined - holding a goblet of wine in his left hand and dressed in the finest of suits - his face and hands tell another story. Of battles, of killing, and of strife.\r\nThe right hand of Mraize is scarred, the fingers crooked, as if they had been broken and badly re-set.\u00a0 However, on his middle finger, he wears a signet ring that bears the same symbol that Shallan had drawn; that her father's steward, Luesh, had carried; and, that Brother Kabsal had tattooed on his body.\r\nTo Shallan, Mraize's violet eyes seem like glass, his scarred face expressionless.\r\nTo Mem, Mraize's face looks like it had seen the wrong side of a sword a couple of times.",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "Mraize believes that in learning the local weapons of a people, one can truly come to understand them.\r\nFurther, he believes that morality is an axis that doesn't hold interest within the Ghostbloods.",
+        "Characteristics": "Mraize likes his clothing to look sharp.\r\nHe lives near the markets in Vedenar, in a large townhome. His quarters are at the top of a staircase, his overstuffed den - according to Mem - a little overwhelming. He keeps his evening jackets there.\r\nHis friends are the type who keep careful track of everyone near them.\r\nAgain according to Mem, Mraize appears on occasion to drop off dirty clothing, then gallivants off someplace to find new types of crem to stain his shirts.\r\nFurther, Mem says that Mraize doesn't want to be called 'master' and that he is of the finest and most refined taste. That he has exquisite taste in clothing and in garment-care professionals.\r\nIn his family line, Mraize has a fain branch.",
+        "Character": "Mraize, and his inscrutable master Iyatil, are deliberate, precise people.\r\nMraize would not say that he's not nice. He would just say that his niceness is an analogous threshold that does not intersect with the threshold of competence and capability of things he's trying to achieve, those things don't need to overlap in his life.\r\nHe'd say he's a very nice person. He was very nice to Shallan by his definition. He was very nice to Lift by his definition of things. Think of all the things he could have done with Lift, and what did he do? He gave her as a present to an ancient being who ruled the tower, who could properly take care of one such as Lift.",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "From the Words of Radiance: Epigraphs ...\r\n*\r\n**Apparently a Splintered seon.",
+        "Trivia": ""
+    }
 }

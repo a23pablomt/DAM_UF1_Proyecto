@@ -12,5 +12,19 @@
         "Appears in": "Rhythm of War"
     },
     "characterImage": null,
-    "characterDescription": "Motif is the name of Ishnah's Cryptic."
+    "characterDescription": "Motif is the name of Ishnah's Cryptic.",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "His Alethi is not good, so he prefers to speak in the Cryptic language.",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "",
+        "Trivia": ""
+    }
 }

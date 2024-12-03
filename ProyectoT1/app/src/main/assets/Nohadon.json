@@ -5,7 +5,7 @@
         "Nationality": "Alethi",
         "Gender": "Male",
         "Died": "Heraldic Epochs",
-        "Abilities": "Surgebinding[1]",
+        "Abilities": "Surgebinding",
         "Hair Color": "Black",
         "Eye Color": "Light blue",
         "Aliases": "Nohadon the Peacemaker,  Bajerden",
@@ -14,5 +14,19 @@
         "Appears in": "The Way of Kings, Oathbringer"
     },
     "characterImage": "https:\/\/static.wikia.nocookie.net\/stormlightarchive\/images\/5\/55\/Nohadon.jpg\/revision\/latest\/scale-to-width-down\/180?cb=20160521053324",
-    "characterDescription": "Nohadon was a king of Alethela during the Heraldic Epochs and one of most influential writers on Roshar, having written the The Way of Kings.\r\nKing Nohadon witnessed the destruction brought by a Desolation on his kingdom, Alethela, which lost its best men. There was barely a family left there that hadn't lost half its members. During Dalinar's vision, it is mentioned that \"9 of 10\" people were lost during the Desolation.\r\nDuring Dalinar's flashback interaction with Nohadon, the man's name is never specifically mentioned, though Dalinar knows that he speaks with the much younger version of the ancient king. In the vision, Dalinar takes the place of one of Nohadon's close advisors and friends who has only one arm.*\r\nThe young Nohadon is reluctant to write his thoughts down and mentions to Dalinar that he should write it for him since he is the only man who can write still left among his friends. Dalinar is shocked that a man of this time would be able to read and write since it is a female art in the current age.\r\nNohadon believed that with each Desolation mankind was getting a step closer to destruction, instead of getting better at resisting them. He belived that their own natures were destroying them and that they should encourage them to become more responsible, better. Nohadon has become known as the Peacemaker, after unifying or working toward unifying the Silver Kingdoms.\r\nNohadon wrote The Way of Kings at the end of his life. The book was used as a guideline for the Knights Radiant, and more recently by King Gavilar, then later by his brother, Dalinar."
+    "characterDescription": "Nohadon was a king of Alethela during the Heraldic Epochs and one of most influential writers on Roshar, having written the The Way of Kings.\r\nKing Nohadon witnessed the destruction brought by a Desolation on his kingdom, Alethela, which lost its best men. There was barely a family left there that hadn't lost half its members. During Dalinar's vision, it is mentioned that \"9 of 10\" people were lost during the Desolation.\r\nDuring Dalinar's flashback interaction with Nohadon, the man's name is never specifically mentioned, though Dalinar knows that he speaks with the much younger version of the ancient king. In the vision, Dalinar takes the place of one of Nohadon's close advisors and friends who has only one arm.*\r\nThe young Nohadon is reluctant to write his thoughts down and mentions to Dalinar that he should write it for him since he is the only man who can write still left among his friends. Dalinar is shocked that a man of this time would be able to read and write since it is a female art in the current age.\r\nNohadon believed that with each Desolation mankind was getting a step closer to destruction, instead of getting better at resisting them. He belived that their own natures were destroying them and that they should encourage them to become more responsible, better. Nohadon has become known as the Peacemaker, after unifying or working toward unifying the Silver Kingdoms.\r\nNohadon wrote The Way of Kings at the end of his life. The book was used as a guideline for the Knights Radiant, and more recently by King Gavilar, then later by his brother, Dalinar.",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "According to Brandon, Nohadon makes a distinction between Soulcasting and Surgebinding because they are distinct in his mind.",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "*It should be noted that Dalinar can still feel both of his own limbs even though the man in the vision had only one. Further, might there be some radical inference here to Lopen in present day Roshar?",
+        "Trivia": ""
+    }
 }

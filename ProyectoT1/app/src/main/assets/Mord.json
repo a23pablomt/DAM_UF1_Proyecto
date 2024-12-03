@@ -9,5 +9,19 @@
         "Appears in": "The Way of Kings"
     },
     "characterImage": null,
-    "characterDescription": "Mord is a darkeyed Alethi farmer living in Hearthstone. He, like many of the town's children, spends his free time playing with the other children.\r\n"
+    "characterDescription": "Mord is a darkeyed Alethi farmer living in Hearthstone. He, like many of the town's children, spends his free time playing with the other children.\r\n",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "",
+        "Trivia": ""
+    }
 }

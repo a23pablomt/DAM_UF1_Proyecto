@@ -5,10 +5,24 @@
         "Gender": "Female",
         "Status": "Unknown",
         "Abilities": "Surgebinding",
-        "Aliases": "Vedeledev, The Healer[1]",
+        "Aliases": "Vedeledev, The Healer",
         "Occupation": "Herald of the Almighty",
         "Appears in": "The Way of Kings (mentioned),  Words of Radiance (mentioned), Oathbringer (mentioned),  Rhythm of War (mentioned)"
     },
     "characterImage": "https:\/\/static.wikia.nocookie.net\/stormlightarchive\/images\/3\/36\/Herald_Vev.png\/revision\/latest?cb=20130622101223",
-    "characterDescription": "Vedel is one of the ten Heralds of the Almighty.  She is associated with the number Vev, the essence Lucentia, and the divine attributes Loving and Healing. She is the patron Herald of the order of Knights Radiant known as Edgedancers.\r\nShe is called Vedeledev or Vev in modern Alethkar.\r\nA Kharbranthian oath of \"by Vedeledev's golden keys!\" or an Alethi oath of  \"Vev's golden keys!\" is used to express astonishment.\r\nAccording to Talenel'Elin, she would train surgeons to prepare for the Desolations."
+    "characterDescription": "Vedel is one of the ten Heralds of the Almighty.  She is associated with the number Vev, the essence Lucentia, and the divine attributes Loving and Healing. She is the patron Herald of the order of Knights Radiant known as Edgedancers.\r\nShe is called Vedeledev or Vev in modern Alethkar.\r\nA Kharbranthian oath of \"by Vedeledev's golden keys!\" or an Alethi oath of  \"Vev's golden keys!\" is used to express astonishment.\r\nAccording to Talenel'Elin, she would train surgeons to prepare for the Desolations.",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "According to Brandon, Vedel would look to be Alethi.",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "When Dalinar explains to Amaram that Kaladin is a good soldier, but that he just carries a few scars which are having trouble healing, Dalinar thinks Vedeledev knows, and that he has a few of those himself.",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "Regarding Lucentia, the eyes are associated with crystal and glass because they are the windows into the mind and the spirit.",
+        "Trivia": ""
+    }
 }

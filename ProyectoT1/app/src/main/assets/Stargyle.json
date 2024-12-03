@@ -7,9 +7,23 @@
         "Status": "Alive",
         "Abilities": "Surgebinding (Lightweaver)",
         "Family": "Wife",
-        "Occupation": "Member of the Unseen Court[1]",
+        "Occupation": "Member of the Unseen Court",
         "Appears in": "Rhythm of War"
     },
     "characterImage": null,
-    "characterDescription": "Stargyle is an eager male recruit that Radiant picks up just before Beryl."
+    "characterDescription": "Stargyle is an eager male recruit that Radiant picks up just before Beryl.",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "He is a tall fellow, and a handsome man with a soldier's build and ready smile.",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "He is talented at seeing into Shadesmar.\r\nThe lighteyed women of the court think highly of him.",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "Stargyle is named for visual artist Steve Argyle.\r\n",
+        "Trivia": ""
+    }
 }

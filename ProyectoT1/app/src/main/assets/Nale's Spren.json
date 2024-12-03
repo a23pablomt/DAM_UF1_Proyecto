@@ -10,5 +10,19 @@
         "Appears in": "Unknown"
     },
     "characterImage": null,
-    "characterDescription": "Nale's spren, according to Brandon, is still alive.\r\n"
+    "characterDescription": "Nale's spren, according to Brandon, is still alive.\r\n",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "Since Nale is the patron of Skybreakers, one can assume that his spren is a highspren.",
+        "Notes": "",
+        "Trivia": ""
+    }
 }

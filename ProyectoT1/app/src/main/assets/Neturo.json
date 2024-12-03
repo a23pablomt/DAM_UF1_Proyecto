@@ -5,10 +5,24 @@
         "Nationality": "Shin",
         "Gender": "Male",
         "Status": "Dead",
-        "Family": "Vallano (father),  Zeenid (wife),[1] Szeth (son),  Elid (daughter)[1]",
+        "Family": "Vallano (father),  Zeenid (wife), Szeth (son),  Elid (daughter)",
         "Occupation": "Shepherd",
         "Appears in": "The Way of Kings (mentioned),  Rhythm of War (mentioned)"
     },
     "characterImage": null,
-    "characterDescription": "Neturo was a Shin. His father was Vallano. Neturo fathered Szeth. He worked as a shepherd in his youth. Szeth believes he is still alive in Shinovar, though Taravangian says Neturo is dead."
+    "characterDescription": "Neturo was a Shin. His father was Vallano. Neturo fathered Szeth. He worked as a shepherd in his youth. Szeth believes he is still alive in Shinovar, though Taravangian says Neturo is dead.",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "",
+        "Character": "Szeth describes his father as the bearer of a different sword, a different burden. Szeth remembers time with his father as a simple one, before his family had been given to the Honorblades. After that, his gentle father had been taught to kill.",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "Something adverse occurred between Neturo and his son, because Szeth prefers to be known as Szeth-son-son-Vallano rather than Szeth-son-Neturo. Alternatively, this may be due to the fact that Szeth does not wish to shame his father with his status as Truthless.[citation\u00a0needed]\r\nIshar said Neturo gave him his Blade for saving Shin people from the Unmade and thanked him for letting him die.",
+        "Trivia": ""
+    }
 }

@@ -4,7 +4,7 @@
         "Ethnicity": "Unknown",
         "Nationality": "Tu Baylan",
         "Gender": "Female",
-        "Died": "1173 Ishanah [1]",
+        "Died": "1173 Ishanah ",
         "Hair Color": "Black",
         "Eye Color": "Dark Brown",
         "Aliases": "The Scout",
@@ -13,5 +13,19 @@
         "Appears in": "Words of Radiance"
     },
     "characterImage": "https:\/\/static.wikia.nocookie.net\/stormlightarchive\/images\/e\/e6\/Tyn_sheep.jpg\/revision\/latest\/scale-to-width-down\/200?cb=20191110224608",
-    "characterDescription": "Tyn was foremost a con-artist and an associate of the Ghostbloods. Shallan meets Tyn, along with her caravan, on her way to the Shattered Plains. She helped Shallan prepare a \"love scam\" on Adolin Kholin, not knowing that Shallan is, in fact, already betrothed to him."
+    "characterDescription": "Tyn was foremost a con-artist and an associate of the Ghostbloods. Shallan meets Tyn, along with her caravan, on her way to the Shattered Plains. She helped Shallan prepare a \"love scam\" on Adolin Kholin, not knowing that Shallan is, in fact, already betrothed to him.",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "Tyn was a lighteyed woman of medium height with a wiry build. Her hair is black and at least shoulder length.",
+        "Personality": "Tyn was intent on her own interests ... always. She would've killed Shallan (without regret) given the opportunity.[citation\u00a0needed]\r\nHowever, Tyn often chose to have someone like Shallan - an acolyte, someone to nurture - under her wing. Shallan suspected that was at least partly because Tyn liked having someone around to impress.\r\nTyn was insistent in that the life she lead required doing some harsh things.",
+        "History": "Tyn was raised in Tu Bayla by parents who worked as interpreters.\r\nLater, she was described by Macob as head of the guards for his caravan.\r\nShe suggested to Macob that in conveying Shallan to the Shattered Plains they could use her soldiers because her own force was reduced to a handful.\r\nLater still, Tyn revealed to Shallan that she had a spanreed and a contact in Tashikk, who gathered what information he could on House Davar.\r\nMore recently, she was an associate of the Ghostbloods.",
+        "Beliefs": "",
+        "Characteristics": "",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "During a spanreed conversation, Tyn discovered that Shallan is, in fact, Jasnah Kholin's ward, while Shallan discovered at the same time that it was Tyn who sent assassins after Jasnah. Between them, a fight ensued and Shallan wound up killing Tyn with her Shardblade.*\r\n*Readers debate whether this Shardblade was Testament or Pattern.",
+        "Trivia": ""
+    }
 }

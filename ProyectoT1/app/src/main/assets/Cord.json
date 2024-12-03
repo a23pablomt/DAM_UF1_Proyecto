@@ -5,10 +5,24 @@
         "Nationality": "Unkalaki",
         "Gender": "Female",
         "Status": "Alive",
-        "Abilities": "Sighted[1], Shardbearer",
+        "Abilities": "Sighted, Shardbearer",
         "Family": "Rock's Family",
         "Appears in": "Oathbringer, Dawnshard,  Rhythm of War"
     },
     "characterImage": null,
-    "characterDescription": "Cord is Rock's sixteen-year-old daughter and one of his two eldest children; her twin is her brother, Gift.\r\nCord has been taught lowlander languages, but only speaks Veden.\r\nRlain feels sorry for Rock's eldest daughter because she barely speaks the Alethi language.\r\nHer full Unkalaki name is Hualinam'lunanaki'akulu. It is a poem about a wedding band.\r\nShe carries Amaram's old Shardbow and wears the full set of Shardplate she'd found in Aimia."
+    "characterDescription": "Cord is Rock's sixteen-year-old daughter and one of his two eldest children; her twin is her brother, Gift.\r\nCord has been taught lowlander languages, but only speaks Veden.\r\nRlain feels sorry for Rock's eldest daughter because she barely speaks the Alethi language.\r\nHer full Unkalaki name is Hualinam'lunanaki'akulu. It is a poem about a wedding band.\r\nShe carries Amaram's old Shardbow and wears the full set of Shardplate she'd found in Aimia.",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "She looks different from the Alethi. More solid, a person who wouldn\u2019t be blown over by a storm, as if she is made of bronze \u2014 a shade subtly reflected by her skin tone. Her red hair is different from Shallan\u2019s: more rusty, darker and deeper; she wears it in a tail, tied with a ribbon.",
+        "Personality": "",
+        "History": "Apparently, monks came from Jah Keved to preach the Almighty to the Horneaters and Rock let his children follow any god they wanted.\r\nShe becomes one of Dalinar's guards for reasons he doesn\u2019t quite understand.\r\n\r\n",
+        "Beliefs": "",
+        "Characteristics": "",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "",
+        "Trivia": ""
+    }
 }

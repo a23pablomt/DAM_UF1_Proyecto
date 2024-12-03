@@ -9,5 +9,19 @@
         "Appears in": "Oathbringer"
     },
     "characterImage": null,
-    "characterDescription": "Vexil the Wise is the prime of Emul.\r\n"
+    "characterDescription": "Vexil the Wise is the prime of Emul.\r\n",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "",
+        "Trivia": ""
+    }
 }

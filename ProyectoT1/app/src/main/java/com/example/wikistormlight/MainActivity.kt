@@ -1,6 +1,10 @@
 package com.example.wikistormlight
 
+import android.R.attr.orientation
+import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,9 +13,12 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -28,17 +35,18 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.rounded.AccountBox
 import androidx.compose.material.icons.rounded.AddCircle
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
-import androidx.compose.material.icons.rounded.LocationOn
-import androidx.compose.material.icons.rounded.Lock
+import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
@@ -65,9 +73,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -85,6 +93,7 @@ import com.example.wikistormlight.model.deserializators.CharacterListCreator
 import com.example.wikistormlight.ui.theme.WikiStormlightTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -168,6 +177,7 @@ fun MyApp(navController: NavHostController) {
 fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavController, drawerState: DrawerState, scope: CoroutineScope) {
 
     ModalNavigationDrawer(
+        drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet(drawerContainerColor = Color(0xFF78A0C8)) {
                 Image(painter = painterResource(R.drawable.shallan),
@@ -177,7 +187,7 @@ fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavCo
                     .padding(5.dp)
                     .offset(0.dp, (-2).dp), color = Color(0xFF141414))
                 NavigationDrawerItem(
-                    icon = { Icon(imageVector = Icons.Rounded.Search, contentDescription = null) },
+                    icon = { Icon(imageVector = Icons.Rounded.Home, contentDescription = null) },
                     label = { Text(text = "Inicio", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
                     onClick = { navController.navigate("start/WikiStormlight") },
@@ -193,10 +203,10 @@ fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavCo
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
                 NavigationDrawerItem(
-                    icon = { Icon(imageVector = Icons.Rounded.AddCircle, contentDescription = null) },
-                    label = { Text(text = "Grupos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    icon = { Icon(imageVector = Icons.Rounded.AccountBox, contentDescription = null) },
+                    label = { Text(text = "Libros", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { navController.navigate("select/Grupos/2") },
+                    onClick = { navController.navigate("select/Libros/2") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -219,8 +229,8 @@ fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavCo
             val mContext = LocalContext.current
 
             val controller = Controller.getInstance(mContext)
-            val nombres = listOf(controller.getCharacter("Abrial") ?: Character("Unknown", "Unknown", "Uknown","Uknown", null,  ""),
-                controller.getCharacter("Shallan Davar") ?: Character("Unknown", "Unknown", "Unknown","Uknown", null, ""))
+            val nombres = listOf(controller.getCharacter("Dalinar Kholin") ?: Character("Unknown", "Unknown", "Uknown","Uknown", null,  "", ""),
+                controller.getCharacter("Shallan Davar") ?: Character("Unknown", "Unknown", "Unknown","Uknown", null, "", ""))
 
             TopAppBar(
                 navigationIcon = {
@@ -252,7 +262,17 @@ fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavCo
                     DropdownMenu(
                         expanded = mDisplayMenu,
                         onDismissRequest = { mDisplayMenu = false }
-                    ) {}
+                    ) {
+                        DropdownMenuItem(
+                            onClick = {
+                                val url = "https://stormlightarchive.fandom.com/wiki/Stormlight_Archive_Wiki"
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                                mContext.startActivity(intent)
+                                mDisplayMenu = false
+                            },
+                            text = { Text("Ver Online", color = Color.Black) }
+                        )
+                    }
                 }
             )
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()){
@@ -265,17 +285,17 @@ fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavCo
                         .height(200.dp)
                 )
                 var query by remember { mutableStateOf("") }
-                var isActive by remember { mutableStateOf(false) } // Estado para gestionar la activación de la SearchBar
+                var isActive by remember { mutableStateOf(false) }
                 SearchBar(modifier = Modifier
                     .width(300.dp)
                     .offset(0.dp, (-120).dp),
                     query = query,
-                    onQueryChange = { newQuery -> query = newQuery }, // Actualizar query cuando cambia
+                    onQueryChange = { newQuery -> query = newQuery },
                     onSearch = {
                         navController.navigate("select/$query/0")
                     },
-                    active = false, // Establecer activo para permitir la escritura
-                    onActiveChange = { isActive = it }, // Cambiar el estado activo cuando cambie
+                    active = false,
+                    onActiveChange = { isActive = it },
                     placeholder = { Text(text = "Search...") },
                     trailingIcon = {
                         Icon(imageVector = Icons.Default.Search, contentDescription = "Search")
@@ -287,7 +307,8 @@ fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavCo
                     .offset(0.dp, (-50).dp)){
                     LazyVerticalGrid(
                         columns = GridCells.Fixed(2),
-                        modifier = Modifier.padding(16.dp)
+                        modifier = Modifier
+                            .padding(16.dp)
                     ) {
                         listOf(items(1) {
                             Box(
@@ -402,7 +423,7 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
                     .padding(5.dp)
                     .offset(0.dp, (-2).dp), color = Color(0xFF141414))
                 NavigationDrawerItem(
-                    icon = { Icon(imageVector = Icons.Rounded.Search, contentDescription = null) },
+                    icon = { Icon(imageVector = Icons.Rounded.Home, contentDescription = null) },
                     label = { Text(text = "Inicio", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
                     onClick = { navController.navigate("start/WikiStormlight") },
@@ -418,10 +439,10 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
                 NavigationDrawerItem(
-                    icon = { Icon(imageVector = Icons.Rounded.AddCircle, contentDescription = null) },
-                    label = { Text(text = "Grupos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    icon = { Icon(imageVector = Icons.Rounded.AccountBox, contentDescription = null) },
+                    label = { Text(text = "Libros", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { navController.navigate("select/Grupos/2") },
+                    onClick = { navController.navigate("select/Libros/2") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -451,7 +472,7 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
         when (tipoPantalla) {
             0 -> {
                 for (i in lista){
-                    val pj = controller.getCharacter(i) ?: Character("None", "None", "None","Uknown", null, "")
+                    val pj = controller.getCharacter(i) ?: Character("None", "None", "None","Uknown", null, "", "")
                     if ((pj).name.lowercase().contains(name.lowercase())){
                         nombres.add(pj)
                     }
@@ -459,15 +480,29 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
             }
             1 -> {
                 for (i in lista){
-                    val pj = controller.getCharacter(i) ?: Character("None", "None", "None","Uknown", null, "")
+                    val pj = controller.getCharacter(i) ?: Character("None", "None", "None","Uknown", null, "", "")
                     if ((pj).img != "null"){
+                        nombres.add(pj)
+                    }
+                }
+            }
+            2 -> {
+                    nombres.add(Character("The Way of Kings", "Book", "None","Uknown", "yes", "", ""))
+                    nombres.add(Character("Words of Radiance", "Book", "None","Uknown", "yes", "", ""))
+                    nombres.add(Character("Oathbringer", "Book", "None","Uknown", "yes", "", ""))
+                    nombres.add(Character("The Rithm of War", "Book", "None","Uknown", "yes", "", ""))
+            }
+            3 -> {
+                for (i in lista){
+                    val pj = controller.getCharacter(i) ?: Character("None", "None", "None","Uknown", null, "", "")
+                    if ((pj).book?.contains(name) == true){
                         nombres.add(pj)
                     }
                 }
             }
             else -> {
                 for (i in lista){
-                    val pj = controller.getCharacter(i) ?: Character("None", "None", "None","Uknown", null, "")
+                    val pj = controller.getCharacter(i) ?: Character("None", "None", "None","Uknown", null, "", "")
                     nombres.add(pj)
                 }
             }
@@ -504,7 +539,17 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
                 DropdownMenu(
                     expanded = mDisplayMenu,
                     onDismissRequest = { mDisplayMenu = false }
-                ) {}
+                ) {
+                    DropdownMenuItem(
+                        onClick = {
+                            val url = "https://stormlightarchive.fandom.com/wiki/Category:Characters"
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                            mContext.startActivity(intent)
+                            mDisplayMenu = false
+                        },
+                        text = { Text("Ver Online", color = Color.Black) }
+                    )
+                }
             }
         )
         Box(
@@ -522,7 +567,12 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
                             .fillMaxSize()
                             .padding(0.dp, 30.dp)
                             .clickable {
-                                navController.navigate("datos/${nombres[index].name}")
+                                if (nombres[index].etnithity == "Book") {
+                                    navController.navigate("select/${nombres[index].name}/3")
+                                } else {
+                                    navController.navigate("datos/${nombres[index].name}")
+                                }
+
                             }
                     ) {
                         Box(
@@ -534,7 +584,12 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
                                 .align(Alignment.TopCenter)
                         ) {
                             Image(
-                                painter = BitmapPainter(controller.readAssetImg(nombres[index].name)),
+                                painter = when {
+                                    nombres[index].etnithity == "Book" ->
+                                        BitmapPainter( BitmapFactory.decodeStream(mContext.assets.open("${nombres[index].name}.jpg")).asImageBitmap())
+                                    else ->
+                                        BitmapPainter(controller.readAssetImg(nombres[index].name))
+                                },
                                 contentDescription = "Image",
                                 modifier = Modifier
                                     .fillMaxWidth()
@@ -582,7 +637,7 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                     .padding(5.dp)
                     .offset(0.dp, (-2).dp), color = Color(0xFF141414))
                 NavigationDrawerItem(
-                    icon = { Icon(imageVector = Icons.Rounded.Search, contentDescription = null) },
+                    icon = { Icon(imageVector = Icons.Rounded.Home, contentDescription = null) },
                     label = { Text(text = "Inicio", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
                     onClick = { navController.navigate("start/WikiStormlight") },
@@ -598,10 +653,10 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
                 NavigationDrawerItem(
-                    icon = { Icon(imageVector = Icons.Rounded.AddCircle, contentDescription = null) },
-                    label = { Text(text = "Grupos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    icon = { Icon(imageVector = Icons.Rounded.AccountBox, contentDescription = null) },
+                    label = { Text(text = "Libros", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { navController.navigate("select/Grupos/2") },
+                    onClick = { navController.navigate("select/Libros/2") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -623,7 +678,7 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
         val mContext = LocalContext.current
 
         val controller = Controller.getInstance(mContext)
-        val nombre = controller.getCharacter(name) ?: Character("Unknown", "Unknown", "Unknown","Uknown", null, "")
+        val nombre = controller.getCharacter(name) ?: Character("Unknown", "Unknown", "Unknown","Uknown", null, "", "")
 
         TopAppBar(
             navigationIcon = {
@@ -658,7 +713,17 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                 DropdownMenu(
                     expanded = mDisplayMenu,
                     onDismissRequest = { mDisplayMenu = false }
-                ) {}
+                ) {
+                    DropdownMenuItem(
+                        onClick = {
+                            val url = "https://stormlightarchive.fandom.com/wiki/$name"
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                            mContext.startActivity(intent)
+                            mDisplayMenu = false
+                        },
+                        text = { Text("Ver Online", color = Color.Black) }
+                    )
+                }
             }
         )
         Box(modifier = Modifier.padding(0.dp, 64.dp, 0.dp, 0.dp)){
@@ -790,9 +855,12 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                         .clip(RoundedCornerShape(20.dp))
                         .background(Color.White)
                 ) {
-                    Image(Icons.Rounded.FavoriteBorder, "", modifier = Modifier.align(Alignment.Center).size(35.dp).clip(
-                        RoundedCornerShape(20.dp)
-                    ))
+                    Image(Icons.Rounded.FavoriteBorder, "", modifier = Modifier
+                        .align(Alignment.Center)
+                        .size(35.dp)
+                        .clip(
+                            RoundedCornerShape(20.dp)
+                        ))
                 }
             }
         }
@@ -808,7 +876,7 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
 @Composable
 fun GreetingPreview() {
     WikiStormlightTheme {
-        PersonajeWiki(
+        Greeting(
             "Moash",
             navController = rememberNavController(), drawerState = rememberDrawerState(initialValue = DrawerValue.Closed), scope = rememberCoroutineScope()
         )

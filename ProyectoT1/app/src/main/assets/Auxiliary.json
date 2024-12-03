@@ -11,5 +11,19 @@
         "Appears in": "The Sunlit Man"
     },
     "characterImage": null,
-    "characterDescription": "Auxiliary is a dead highspren that is bonded to Nomad.\r\n"
+    "characterDescription": "Auxiliary is a dead highspren that is bonded to Nomad.\r\n",
+    "characterDetails": {
+        "Biography": "",
+        "Appearance": "",
+        "Personality": "",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "",
+        "Character": "",
+        "Abilities": "",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "",
+        "Trivia": ""
+    }
 }

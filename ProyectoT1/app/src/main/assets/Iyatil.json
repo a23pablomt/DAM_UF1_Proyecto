@@ -1,15 +1,29 @@
 {
     "characterName": "Iyatil",
     "characterInfo": {
-        "Ethnicity": "Malwish Southerner[1][2]",
+        "Ethnicity": "Malwish Southerner",
         "Nationality": "Silverlight",
         "Gender": "Female",
         "Status": "Alive",
         "Abilities": "Worldhopper",
         "Title(s)": "Babsk",
-        "Occupation": "Seventeenth Shard (formerly),[3] Ghostblood",
+        "Occupation": "Seventeenth Shard (formerly), Ghostblood",
         "Appears in": "Words of Radiance,  Oathbringer (mentioned),  Rhythm of War (mentioned)"
     },
     "characterImage": "https:\/\/static.wikia.nocookie.net\/stormlightarchive\/images\/6\/61\/Iyatil.jpg\/revision\/latest\/scale-to-width-down\/180?cb=20140906053036",
-    "characterDescription": "Iyatil is a member of the Ghostbloods, a secret organization on Roshar. In her initial encounter with Iyatil, Shallan (as Veil) mistakenly assumes her to be a man."
+    "characterDescription": "Iyatil is a member of the Ghostbloods, a secret organization on Roshar. In her initial encounter with Iyatil, Shallan (as Veil) mistakenly assumes her to be a man.",
+    "characterDetails": {
+        "Biography": "Iyatil is 'from' three different places. She now lives on Roshar, but she's from a different place, yet that place isn't the world from which her people come.\r\nAnother of these three places is Scadrial: in Shadows of Self, there's a story in one of the broadsheets about someone seeing a woman with a scary mask emerging from a pool of water in the mountains. This is likely Iyatil, returning from Roshar via Scadrial's perpendicularity.\r\nLastly, there is a place \u2013 yet not a world \u2013 in the cosmere where a lot of Worldhoppers have settled; it is where Iyatil is from, even though her ethnicity is not from there. This place is Silverlight, and Iyatil is a Malwish Southerner \u2013 a Hunter? \u2013 though she was not born on Scadrial. She wears a mask; it might grow into her face, just as do those of the Hunters. And, just as the Malwish feel about Northerners on Scadrial, Iyatil has the following exchange with Shallan (again, as Veil):",
+        "Appearance": "Iyatil is a short, tan-skinned woman who wears a carapace mask tied to her face.\r\nBehind the mask, she has unblinking dark eyes and an impassive mouth. She wears simple, dark brown clothing tied with an intricate belt, studded with more carapace.",
+        "Personality": "Iyatil is very self-contained, revealing little about herself, until she encounters Shallan. She professes to Shallan to be Mraize's master (instead of the other way around, which Shallan has assumed, based on her previous encounters with Mraize).\r\nMraize refers to Iyatil as his 'babsk,' a master\/apprentice relationship used in Thaylenah. This indicates that Mraize is Thaylen.",
+        "History": "",
+        "Beliefs": "",
+        "Characteristics": "",
+        "Character": "",
+        "Abilities": "In addition to her abilities as a Worldhopper, Iyatil is also an assassin. She attacks Amaram with her blow darts during his attempt to remove Taln from Dalinar's temple complex. Taln saves Amaram's life by snatching the darts out of the air. Iyatil was attempting to kill Amaram because his maps and possible attempts to find lost Urithiru appear to be in conflict with the plans of the Ghostbloods.",
+        "Relationships": "",
+        "Speculation": "",
+        "Notes": "According to Brandon, Iyatil's heritage from Scadrial is more recent than his own heritage from Denmark.\r\nIyatil is on board with Mraize having kidnapped Lift.",
+        "Trivia": ""
+    }
 }
