@@ -29,14 +29,18 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.rounded.AddCircle
+import androidx.compose.material.icons.rounded.Favorite
+import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material.icons.rounded.LocationOn
 import androidx.compose.material.icons.rounded.Lock
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.Person
+import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -63,10 +67,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -173,6 +177,14 @@ fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavCo
                     .padding(5.dp)
                     .offset(0.dp, (-2).dp), color = Color(0xFF141414))
                 NavigationDrawerItem(
+                    icon = { Icon(imageVector = Icons.Rounded.Search, contentDescription = null) },
+                    label = { Text(text = "Inicio", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    selected = false,
+                    onClick = { navController.navigate("start/WikiStormlight") },
+                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
+                )
+                HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
+                NavigationDrawerItem(
                     icon = { Icon(imageVector = Icons.Rounded.Person, contentDescription = null) },
                     label = { Text(text = "Personajes", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
@@ -184,24 +196,16 @@ fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavCo
                     icon = { Icon(imageVector = Icons.Rounded.AddCircle, contentDescription = null) },
                     label = { Text(text = "Grupos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { navController.navigate("select/Grupos/3") },
+                    onClick = { navController.navigate("select/Grupos/2") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
 
                 NavigationDrawerItem(
-                    icon = { Icon(imageVector = Icons.Rounded.LocationOn, contentDescription = null) },
-                    label = { Text(text = "Lugares", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    icon = { Icon(imageVector = Icons.Rounded.Favorite, contentDescription = null) },
+                    label = { Text(text = "Favoritos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { navController.navigate("select/Lugares") },
-                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
-                )
-                HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
-                NavigationDrawerItem(
-                    icon = { Icon(imageVector = Icons.Rounded.Lock, contentDescription = null) },
-                    label = { Text(text = "Magia", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
-                    selected = false,
-                    onClick = { navController.navigate("select/Magia") },
+                    onClick = { navController.navigate("select/Favoritos") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -398,6 +402,14 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
                     .padding(5.dp)
                     .offset(0.dp, (-2).dp), color = Color(0xFF141414))
                 NavigationDrawerItem(
+                    icon = { Icon(imageVector = Icons.Rounded.Search, contentDescription = null) },
+                    label = { Text(text = "Inicio", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    selected = false,
+                    onClick = { navController.navigate("start/WikiStormlight") },
+                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
+                )
+                HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
+                NavigationDrawerItem(
                     icon = { Icon(imageVector = Icons.Rounded.Person, contentDescription = null) },
                     label = { Text(text = "Personajes", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
@@ -409,24 +421,16 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
                     icon = { Icon(imageVector = Icons.Rounded.AddCircle, contentDescription = null) },
                     label = { Text(text = "Grupos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { navController.navigate("select/Grupos") },
+                    onClick = { navController.navigate("select/Grupos/2") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
 
                 NavigationDrawerItem(
-                    icon = { Icon(imageVector = Icons.Rounded.LocationOn, contentDescription = null) },
-                    label = { Text(text = "Lugares", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    icon = { Icon(imageVector = Icons.Rounded.Favorite, contentDescription = null) },
+                    label = { Text(text = "Favoritos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { navController.navigate("select/Lugares") },
-                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
-                )
-                HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
-                NavigationDrawerItem(
-                    icon = { Icon(imageVector = Icons.Rounded.Lock, contentDescription = null) },
-                    label = { Text(text = "Magia", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
-                    selected = false,
-                    onClick = { navController.navigate("select/Magia") },
+                    onClick = { navController.navigate("select/Favoritos") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -578,6 +582,14 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                     .padding(5.dp)
                     .offset(0.dp, (-2).dp), color = Color(0xFF141414))
                 NavigationDrawerItem(
+                    icon = { Icon(imageVector = Icons.Rounded.Search, contentDescription = null) },
+                    label = { Text(text = "Inicio", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    selected = false,
+                    onClick = { navController.navigate("start/WikiStormlight") },
+                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
+                )
+                HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
+                NavigationDrawerItem(
                     icon = { Icon(imageVector = Icons.Rounded.Person, contentDescription = null) },
                     label = { Text(text = "Personajes", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
@@ -589,24 +601,16 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                     icon = { Icon(imageVector = Icons.Rounded.AddCircle, contentDescription = null) },
                     label = { Text(text = "Grupos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { navController.navigate("select/Grupos") },
+                    onClick = { navController.navigate("select/Grupos/2") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
 
                 NavigationDrawerItem(
-                    icon = { Icon(imageVector = Icons.Rounded.LocationOn, contentDescription = null) },
-                    label = { Text(text = "Lugares", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
+                    icon = { Icon(imageVector = Icons.Rounded.Favorite, contentDescription = null) },
+                    label = { Text(text = "Favoritos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
-                    onClick = { navController.navigate("select/Lugares") },
-                    colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
-                )
-                HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
-                NavigationDrawerItem(
-                    icon = { Icon(imageVector = Icons.Rounded.Lock, contentDescription = null) },
-                    label = { Text(text = "Magia", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
-                    selected = false,
-                    onClick = { navController.navigate("select/Magia") },
+                    onClick = { navController.navigate("select/Favoritos") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -681,6 +685,7 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                                 contentDescription = "Image",
                                 modifier = Modifier
                                     .fillMaxWidth()
+                                    .align(Alignment.TopStart)
                                     .clip(RoundedCornerShape(20.dp))
                                     .border(5.dp, Color.White, RoundedCornerShape(20.dp)),
                                 contentScale = ContentScale.Crop
@@ -771,6 +776,25 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                     ) { nombre.description?.let { Text(it, modifier = Modifier.padding(15.dp)) } }
                 }
             }
+            FloatingActionButton(
+                modifier = Modifier
+                    .size(100.dp)
+                    .padding(20.dp)
+                    .align(Alignment.BottomEnd),
+                onClick = {}
+
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(RoundedCornerShape(20.dp))
+                        .background(Color.White)
+                ) {
+                    Image(Icons.Rounded.FavoriteBorder, "", modifier = Modifier.align(Alignment.Center).size(35.dp).clip(
+                        RoundedCornerShape(20.dp)
+                    ))
+                }
+            }
         }
     }
     }
@@ -784,8 +808,8 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
 @Composable
 fun GreetingPreview() {
     WikiStormlightTheme {
-        Greeting(
-            "Kabsal",
+        PersonajeWiki(
+            "Moash",
             navController = rememberNavController(), drawerState = rememberDrawerState(initialValue = DrawerValue.Closed), scope = rememberCoroutineScope()
         )
     }
