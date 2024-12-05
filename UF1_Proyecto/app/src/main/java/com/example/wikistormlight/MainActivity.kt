@@ -515,6 +515,14 @@ fun SelectorDePersonaje(
                     }
                 }
             }
+            4 -> {
+                for (i in lista){
+                    val pj = controller.getCharacter(i) ?: Character("None", "None", "None","Uknown", null, "", "")
+                    if ((pj).book?.contains(name) == true){
+                        nombres.add(pj)
+                    }
+                }
+            }
             else -> {
                 for (i in lista){
                     val pj = controller.getCharacter(i) ?: Character("None", "None", "None","Uknown", null, "", "")
@@ -583,7 +591,7 @@ fun SelectorDePersonaje(
                             .padding(0.dp, 30.dp)
                             .clickable {
                                 if (nombres[index].etnithity == "Book") {
-                                    navController.navigate("select/${nombres[index].name}/3")
+                                    navController.navigate("select/${nombres[index].name}/4")
                                 } else {
                                     navController.navigate("datos/${nombres[index].name}")
                                 }
