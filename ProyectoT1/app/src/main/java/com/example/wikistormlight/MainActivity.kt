@@ -1,6 +1,5 @@
 package com.example.wikistormlight
 
-import android.R.attr.orientation
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.BitmapFactory
@@ -13,12 +12,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -36,13 +32,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.rounded.AccountBox
-import androidx.compose.material.icons.rounded.AddCircle
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.Person
-import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.DropdownMenu
@@ -82,14 +76,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.room.Room
-import com.example.wikistormlight.model.AppDatabase
 import com.example.wikistormlight.model.StringViewModel
 import com.example.wikistormlight.model.controller.Controller
 import com.example.wikistormlight.model.dataclasses.Character
@@ -114,16 +105,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp(navController: NavHostController) {
 
-    val contexto = LocalContext.current
-    val database: AppDatabase by lazy {
-        Room.databaseBuilder(
-            context = contexto,
-            AppDatabase::class.java,
-            "app_database"
-        ).build()
-    }
-
-    val favs: StringViewModel = viewModel()
+    val viewmodel: StringViewModel = StringViewModel(LocalContext.current)
 
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -159,7 +141,8 @@ fun MyApp(navController: NavHostController) {
                                 navController,
                                 drawerState,
                                 scope,
-                                it1
+                                it1,
+                                viewmodel
                             )
                         }
                     }
@@ -177,7 +160,8 @@ fun MyApp(navController: NavHostController) {
                             modifier = Modifier.padding(innerPadding),
                             navController,
                             drawerState,
-                            scope
+                            scope,
+                            viewmodel
                         )
                     }
                 }
@@ -234,7 +218,7 @@ fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavCo
                     label = { Text(text = "Favoritos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
                     onClick = { scope.launch { drawerState.close() }
-                        navController.navigate("select/Favoritos") },
+                        navController.navigate("select/Favoritos/3") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -429,7 +413,15 @@ fun  Greeting(named: String, modifier: Modifier = Modifier, navController: NavCo
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navController: NavController, drawerState: DrawerState, scope: CoroutineScope, tipoPantalla: Int) {
+fun SelectorDePersonaje(
+    name: String,
+    modifier: Modifier = Modifier,
+    navController: NavController,
+    drawerState: DrawerState,
+    scope: CoroutineScope,
+    tipoPantalla: Int,
+    stringList: StringViewModel
+) {
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -474,7 +466,7 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
                     label = { Text(text = "Favoritos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
                     onClick = { scope.launch { drawerState.close() }
-                        navController.navigate("select/Favoritos") },
+                        navController.navigate("select/Favoritos/3") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -518,7 +510,7 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
             3 -> {
                 for (i in lista){
                     val pj = controller.getCharacter(i) ?: Character("None", "None", "None","Uknown", null, "", "")
-                    if ((pj).book?.contains(name) == true){
+                    if ((pj).name in stringList.strings){
                         nombres.add(pj)
                     }
                 }
@@ -647,7 +639,14 @@ fun SelectorDePersonaje(name: String, modifier: Modifier = Modifier, navControll
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: NavController, drawerState: DrawerState, scope: CoroutineScope) {
+fun PersonajeWiki(
+    name: String,
+    modifier: Modifier = Modifier,
+    navController: NavController,
+    drawerState: DrawerState,
+    scope: CoroutineScope,
+    stringList: StringViewModel
+) {
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -692,7 +691,7 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                     label = { Text(text = "Favoritos", fontSize = 20.sp, fontWeight = FontWeight.SemiBold) },
                     selected = false,
                     onClick = { scope.launch { drawerState.close() }
-                        navController.navigate("select/Favoritos") },
+                        navController.navigate("select/Favoritos/3") },
                     colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color(0xFF78A0C8))
                 )
                 HorizontalDivider(modifier = Modifier.padding(5.dp), color = Color(0xFF141414))
@@ -882,8 +881,18 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                         .clip(RoundedCornerShape(20.dp))
                         .background(Color.White)
                 ) {
-                    if (false){
-
+                    if (name in stringList.strings){
+                        Image(
+                            Icons.Rounded.Favorite, "", modifier = Modifier
+                                .align(Alignment.Center)
+                                .size(35.dp)
+                                .clip(
+                                    RoundedCornerShape(20.dp)
+                                )
+                                .clickable {
+                                    stringList.deleteString(name)
+                                }
+                        )
                     }
                     else {
                         Image(
@@ -893,6 +902,9 @@ fun PersonajeWiki(name: String, modifier: Modifier = Modifier, navController: Na
                                 .clip(
                                     RoundedCornerShape(20.dp)
                                 )
+                                .clickable {
+                                    stringList.addString(name)
+                                }
                         )
                     }
                 }

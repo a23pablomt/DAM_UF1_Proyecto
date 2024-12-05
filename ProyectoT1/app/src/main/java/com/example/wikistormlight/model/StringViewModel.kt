@@ -1,31 +1,42 @@
 package com.example.wikistormlight.model
 
-import androidx.compose.runtime.mutableStateListOf
+import android.content.Context
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 
-class StringViewModel(private val stringDao: StringDao) : ViewModel() {
+class StringViewModel(private val context: Context) : ViewModel() {
 
-    private val _strings = mutableStateListOf<String>()
-    val strings: List<String> get() = _strings
+    private val sharedPreferencesHelper = SharedPreferencesHelper(context)
+
+    // Lista que se almacenará y mostrará
+    var strings by mutableStateOf<List<String>>(emptyList())
+        private set
 
     init {
         loadStrings()
     }
 
+    // Cargar la lista de strings desde SharedPreferences
     private fun loadStrings() {
-        viewModelScope.launch {
-            _strings.clear()
-            _strings.addAll(stringDao.getAllStrings().map { it.value })
-        }
+        strings = sharedPreferencesHelper.getStringList("string_list_key")
     }
 
+    // Agregar un nuevo string y guardar la lista actualizada
     fun addString(newString: String) {
-        viewModelScope.launch {
-            val stringEntity = StringEntity(value = newString)
-            stringDao.insert(stringEntity)
-            loadStrings() // Recargar la lista después de insertar
+        val updatedList = strings.toMutableList().apply {
+            add(newString)
         }
+        strings = updatedList
+        sharedPreferencesHelper.saveStringList("string_list_key", updatedList)
+    }
+
+    fun deleteString(stringToDelete: String) {
+        val updatedList = strings.toMutableList().apply {
+            remove(stringToDelete) // Remove the string from the list
+        }
+        strings = updatedList
+        sharedPreferencesHelper.saveStringList("string_list_key", updatedList) // Save the updated list
     }
 }
